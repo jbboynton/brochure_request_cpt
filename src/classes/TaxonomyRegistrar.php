@@ -1,6 +1,6 @@
 <?php
 
-namespace JB\MPS;
+namespace JB\BRC;
 
 use JB\BRC\Constants;
 
@@ -39,16 +39,16 @@ class TaxonomyRegistrar {
   private function register($taxonomy_args) {
     $name = $taxonomy_args['name'];
     $args = $taxonomy_args['args'];
-    $object = Constants:$POST_TYPE_NAME;
+    $object = Constants::$POST_TYPE_NAME;
 
-    if (is_new_taxonomy($name)) {
+    if ($this->is_new_taxonomy($name)) {
       register_taxonomy($name, $object, $args);
     } else {
       $code = 'taxonomy_already_exists';
       $message = 'This taxonomy already exists.';
 
       // TODO: raise WP Error or implement smarter error handling
-      die(echo $this->registration_error($code, $name, $message));
+      die($this->registration_error($code, $name, $message));
     }
 
     return $name;
@@ -91,7 +91,7 @@ class TaxonomyRegistrar {
             'popular_items' => 'Popular Brands',
             'separate_items_with_commas' => 'Separate brands with commas',
             'add_or_remove_items' => 'Add or remove brands',
-            'choose_from_most_used' => 'Choose from the most used brands',
+            'choose_from_most_used' => false,
             'not_found' => 'No brands found.'
           ),
           'public' => true,
@@ -137,8 +137,7 @@ class TaxonomyRegistrar {
             'separate_items_with_commas' =>
               'Separate product categories with commas',
             'add_or_remove_items' => 'Add or remove product categories',
-            'choose_from_most_used' =>
-              'Choose from the most used product categories',
+            'choose_from_most_used' => false,
             'not_found' => 'No product categories found.'
           ),
           'public' => true,

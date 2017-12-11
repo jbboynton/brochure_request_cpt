@@ -2,24 +2,26 @@
 
 namespace JB\BRC;
 
+use JB\BRC\TaxonomyRegistrar;
 use JB\BRC\Constants;
 
 class CustomPostType {
 
-  private $name = Constants::$POST_TYPE_NAME;
+  private $name = '';
   private $labels = [];
-  private $taxonomy_registrar = new TaxonomyRegistrar();
+  private $taxonomy_registrar = null;
   private $taxonomies = [];
   private $supported_features = [];
 
   public function __construct() {
+    $this->name = Constants::$POST_TYPE_NAME;
+    $this->taxonomy_registrar = new TaxonomyRegistrar();
     $this->build_labels();
     $this->build_supported_features();
 
     $this->taxonomies = $this->taxonomy_registrar->all();
 
     $this->register_post_type();
-    $this->register_taxonomies();
   }
 
   private function register_post_type() {
@@ -46,7 +48,7 @@ class CustomPostType {
       // 'capabilities' can be set, but is generated automatically if omitted
       'map_meta_cap' => null,
       'hierarchical' => false,
-      'supports' => $this->supports,
+      'supports' => $this->supported_features,
       'taxonomies' => $this->taxonomies,
       'has_archive' => true,
       'rewrite' => array('slug' => 'brochure'),

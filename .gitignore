@@ -3,4 +3,3 @@ vendor
 *.DS_Store
 *.log
 bin
-composer.lock

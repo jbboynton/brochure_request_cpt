@@ -15,11 +15,12 @@ require_once plugin_dir_path(__FILE__) . 'src/classes/TaxonomyRegistrar.php';
 
 use JB\BRC;
 use JB\BRC\Activation;
+use JB\BRC\Constants;
 use JB\BRC\CustomPostType;
 use JB\BRC\TaxonomyRegistrar;
 
 add_action('init', function() {
-  new CustomerPostType();
+  new CustomPostType();
 });
 
 register_activation_hook(__FILE__, function() {
