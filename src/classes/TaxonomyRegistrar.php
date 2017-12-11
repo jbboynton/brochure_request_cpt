@@ -91,7 +91,7 @@ class TaxonomyRegistrar {
             'popular_items' => 'Popular Brands',
             'separate_items_with_commas' => 'Separate brands with commas',
             'add_or_remove_items' => 'Add or remove brands',
-            'choose_from_most_used' => false,
+            'choose_from_most_used' => 'Choose a brand...',
             'not_found' => 'No brands found.'
           ),
           'public' => true,
@@ -137,7 +137,7 @@ class TaxonomyRegistrar {
             'separate_items_with_commas' =>
               'Separate product categories with commas',
             'add_or_remove_items' => 'Add or remove product categories',
-            'choose_from_most_used' => false,
+            'choose_from_most_used' => 'Choose a product category...',
             'not_found' => 'No product categories found.'
           ),
           'public' => true,

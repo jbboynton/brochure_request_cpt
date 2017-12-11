@@ -81,7 +81,7 @@ class CustomPostType {
       'insert_into_item' => null,
       'uploaded_to_this_item' => 'Uploaded to this brochure',
       'featured_image' => 'Brochure Cover',
-      'set_featured_image' => 'Choose Brochure Cover',
+      'set_featured_image' => 'Set Brochure Cover',
       'remove_featured_image' => 'Remove Brochure Cover',
       'use_featured_image' => 'Use as Brochure Cover',
       'menu_name' => 'Brochures',
