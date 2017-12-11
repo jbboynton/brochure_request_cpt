@@ -1,0 +1,15 @@
+{
+  "name": "jbboynton/brochure_request_cpt",
+  "version" : "0.1.0",
+  "description": "A custom post type for representing brochures and catalogs.",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "James Boynton",
+      "email": "james.boynton0@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  }
+}
