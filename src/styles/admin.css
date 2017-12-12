@@ -1,0 +1,21 @@
+.monospace-styled {
+  font: normal 12px monospace;
+  color: #bc352c;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.current-brochure-area {
+  display: block;
+  border: 1px solid #e5e5e5;
+  padding: 15px 8px;
+  margin: 14px auto;
+}
+
+.unset-brochure-form {
+  display: inline;
+}
+
+.brochure-link-group {
+  margin-bottom: 17px;
+}

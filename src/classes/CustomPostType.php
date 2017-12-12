@@ -51,7 +51,7 @@ class CustomPostType {
       'supports' => $this->supported_features,
       'taxonomies' => $this->taxonomies,
       'has_archive' => true,
-      'rewrite' => array('slug' => 'brochure'),
+      'rewrite' => array('slug' => 'resources/brochures'),
       'query_var' => true,
       'can_export' => true,
       'delete_with_user' => false,
