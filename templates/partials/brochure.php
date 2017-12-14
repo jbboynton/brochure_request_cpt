@@ -1,4 +1,5 @@
-<?php
-echo "<h1>BROCHURE</h1>";
-var_dump($loop->the_post());
-?>
+<div class="col-md-3">
+  <?php the_post_thumbnail(); ?>
+  <?php the_title(); ?>
+  <a class="menu-button button-green-dark" href="#">Download</a>
+</div>

@@ -15,19 +15,7 @@ class Metabox {
 		add_action('post_edit_form_tag', array($this, 'add_enctype'));
 		add_action('add_meta_boxes', array($this, 'add_meta_box'));
 		add_action('save_post', array($this, 'save'));
-    add_filter('archive_template', array($this, 'brochure_archive_template'));
 	}
-
-  public function brochure_archive_template($archive_template) {
-    global $post;
-
-    if ($post->post_type == Constants::$POST_TYPE_NAME) {
-      $archive_template = plugin_dir_path(dirname(__DIR__)) .
-        'templates/archive-brochure.php';
-    }
-
-    return $archive_template;
-  }
 
   public function add_enctype() {
     echo ' enctype="multipart/form-data"';
@@ -37,17 +25,6 @@ class Metabox {
     $args = $this->build_meta_box_args();
 
     add_meta_box(...$args);
-  }
-
-  private function build_meta_box_args() {
-    return array(
-      'brc_brochure_uploader',
-      'Select A Brochure',
-      array($this, 'callback'),
-      array(Constants::$POST_TYPE_NAME),
-      'normal',
-      'high'
-    );
   }
 
   public function callback($current_post) {
@@ -75,6 +52,17 @@ class Metabox {
       $brochure = new Brochure($post_id);
       $brochure->save();
     }
+  }
+
+  private function build_meta_box_args() {
+    return array(
+      'brc_brochure_uploader',
+      'Select A Brochure',
+      array($this, 'callback'),
+      array(Constants::$POST_TYPE_NAME),
+      'normal',
+      'high'
+    );
   }
 
   private function is_brochure_post($id) {

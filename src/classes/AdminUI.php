@@ -10,27 +10,26 @@ class AdminUI {
   private $current_post_id = null;
 
   public function __construct() {
-    add_action('admin_head', array($this, 'set_current_post_id'));
-
     new Metabox();
 
     add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'));
-  }
-
-  public function set_current_post_id() {
-    global $post;
-
-    $this->current_post_id = $post->ID;
   }
 
   public function enqueue_assets() {
     global $post_type;
 
     if ($post_type == Constants::$POST_TYPE_NAME) {
+      $this->set_current_post_id();
       $this->enqueue_css();
       $this->enqueue_media();
       $this->enqueue_ajax();
     }
+  }
+
+  private function set_current_post_id() {
+    global $post;
+
+    $this->current_post_id = $post->ID;
   }
 
   /**

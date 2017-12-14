@@ -22,6 +22,19 @@ class CustomPostType {
     $this->taxonomies = $this->taxonomy_registrar->all();
 
     $this->register_post_type();
+
+    add_filter('archive_template', array($this, 'brochure_archive_template'));
+  }
+
+  public function brochure_archive_template($archive_template) {
+    global $post;
+
+    if ($post->post_type == Constants::$POST_TYPE_NAME) {
+      $archive_template = plugin_dir_path(dirname(__DIR__)) .
+        'templates/archive-brochure.php';
+    }
+
+    return $archive_template;
   }
 
   private function register_post_type() {
