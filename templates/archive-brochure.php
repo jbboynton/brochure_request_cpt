@@ -30,7 +30,7 @@ get_header(); ?>
         </div>
         <div class="col-md-9">
           <div class="main-content">
-            <div class="archive">
+            <div id="posts-container" class="archive">
               <?php if ($loop->have_posts()): ?>
 
                 <?php

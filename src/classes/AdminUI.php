@@ -7,12 +7,13 @@ use JB\BRC\Metabox;
 
 class AdminUI {
 
-  private $current_post_id = null;
+  private $current_post_id = 0;
 
   public function __construct() {
     new Metabox();
 
     add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'));
+    add_action('in_admin_header', array($this, 'remove_screen_options'));
   }
 
   public function enqueue_assets() {
@@ -23,6 +24,18 @@ class AdminUI {
       $this->enqueue_css();
       $this->enqueue_media();
       $this->enqueue_admin_ajax();
+    }
+  }
+
+  public function remove_screen_options() {
+    global $post_type;
+    global $wp_meta_boxes;
+
+    $meta_boxes = $wp_meta_boxes[get_current_screen()->id];
+
+    if ($post_type == Constants::$POST_TYPE_NAME) {
+      unset($wp_meta_boxes[get_current_screen()->id]['advanced']['high']['A2A_SHARE_SAVE_meta']);
+      unset($wp_meta_boxes[get_current_screen()->id]['normal']['default']['mymetabox_revslider_0']);
     }
   }
 

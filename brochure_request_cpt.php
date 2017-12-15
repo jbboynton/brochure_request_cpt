@@ -12,10 +12,13 @@ require_once plugin_dir_path(__FILE__) . 'src/classes/AdminAjax.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Brochure.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Constants.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/CustomPostType.php';
+require_once plugin_dir_path(__FILE__) . 'src/classes/Filter.php';
+require_once plugin_dir_path(__FILE__) . 'src/classes/FilterAjax.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Helpers.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Metabox.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/Sidebar.php';
 require_once plugin_dir_path(__FILE__) . 'src/classes/TaxonomyRegistrar.php';
+require_once plugin_dir_path(__FILE__) . 'src/classes/Widget.php';
 
 use JB\BRC;
 use JB\BRC\Activation;
@@ -24,16 +27,25 @@ use JB\BRC\AdminAjax;
 use JB\BRC\Brochure;
 use JB\BRC\Constants;
 use JB\BRC\CustomPostType;
+use JB\BRC\Filter;
+use JB\BRC\FilterAjax;
 use JB\BRC\Helpers;
 use JB\BRC\Metabox;
 use JB\BRC\Sidebar;
 use JB\BRC\TaxonomyRegistrar;
+use JB\BRC\Widget;
 
 add_action('init', function() {
   new AdminUI();
   new AdminAjax();
   new CustomPostType();
+  new Filter();
+  new FilterAjax();
   new Sidebar();
+});
+
+add_action('widgets_init', function() {
+  new Widget();
 });
 
 register_activation_hook(__FILE__, function() {
