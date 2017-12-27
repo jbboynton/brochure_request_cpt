@@ -5,7 +5,7 @@ namespace JB\BRC;
 use JB\BRC\Constants;
 use JB\BRC\Helpers;
 
-class Ajax {
+class AdminAjax {
 
   public function __construct() {
     add_action('wp_ajax_unset_brochure', array($this, 'unset_brochure'));

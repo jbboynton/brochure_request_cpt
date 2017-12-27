@@ -33,10 +33,10 @@ class Constants {
   public static $MEDIA_FRAME_BUTTON_TEXT = 'Use this brochure';
 
   // AJAX
-  public static $AJAX_JS_ID = 'brc_ajax_js';
-  public static $AJAX_JS_PATH = 'brochure_request_cpt/src/js/ajax.js';
-  public static $AJAX_JS_CURRENT_FILE_ID = 'brc-current-file-url';
-  public static $AJAX_JS_DELETE_BUTTON_ID = 'brc-delete-button';
+  public static $ADMIN_AJAX_JS_ID = 'brc_ajax_js';
+  public static $ADMIN_AJAX_JS_PATH = 'brochure_request_cpt/src/js/ajax.js';
+  public static $ADMIN_AJAX_JS_CURRENT_FILE_ID = 'brc-current-file-url';
+  public static $ADMIN_AJAX_JS_DELETE_BUTTON_ID = 'brc-delete-button';
 
 }
 

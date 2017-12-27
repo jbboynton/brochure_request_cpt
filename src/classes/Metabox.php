@@ -33,8 +33,8 @@ class Metabox {
     $launch_button_id = Constants::$MEDIA_JS_LAUNCH_BUTTON_ID;
     $preview_link_id = Constants::$MEDIA_JS_PREVIEW_LINK_ID;
     $clear_button_id = Constants::$MEDIA_JS_CLEAR_BUTTON_ID;
-    $current_file_id = Constants::$AJAX_JS_CURRENT_FILE_ID;
-    $delete_button_id = Constants::$AJAX_JS_DELETE_BUTTON_ID;
+    $current_file_id = Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID;
+    $delete_button_id = Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID;
     $delete_button_enabled = ($meta_data ? "enabled" : "disabled");
 
     ob_start();

@@ -22,7 +22,7 @@ class AdminUI {
       $this->set_current_post_id();
       $this->enqueue_css();
       $this->enqueue_media();
-      $this->enqueue_ajax();
+      $this->enqueue_admin_ajax();
     }
   }
 
@@ -104,27 +104,28 @@ class AdminUI {
     );
   }
 
-  private function enqueue_ajax() {
-    $ajax_js_args = $this->ajax_js_args();
-    $ajax_js_id = $ajax_js_args[0];
-    $ajax_js_localization_args = $this->ajax_js_localization($ajax_js_id);
+  private function enqueue_admin_ajax() {
+    $admin_ajax_js_args = $this->admin_ajax_js_args();
+    $admin_ajax_js_id = $admin_ajax_js_args[0];
+    $admin_ajax_js_localization_args =
+      $this->admin_ajax_js_localization($admin_ajax_js_id);
 
-    wp_register_script(...$ajax_js_args);
-    wp_localize_script(...$ajax_js_localization_args);
-    wp_enqueue_script($ajax_js_id);
+    wp_register_script(...$admin_ajax_js_args);
+    wp_localize_script(...$admin_ajax_js_localization_args);
+    wp_enqueue_script($admin_ajax_js_id);
   }
 
-  private function ajax_js_args() {
+  private function admin_ajax_js_args() {
     return array(
-      Constants::$AJAX_JS_ID,                 // Unique string identifier
-      plugins_url(Constants::$AJAX_JS_PATH),  // Source URL
-      array('jquery'),                        // Dependencies
+      Constants::$ADMIN_AJAX_JS_ID,                 // Unique string identifier
+      plugins_url(Constants::$ADMIN_AJAX_JS_PATH),  // Source URL
+      array('jquery'),                              // Dependencies
       null,                                   // Version (null = not versioned)
       false                                   // Load script in footer
     );
   }
 
-  private function ajax_js_localization($script_id) {
+  private function admin_ajax_js_localization($script_id) {
     global $post;
 
     return array(
@@ -132,8 +133,8 @@ class AdminUI {
       'ajaxLocalData',
       array(
         'ajaxURL' => admin_url('admin-ajax.php'),
-        'currentFile' => Constants::$AJAX_JS_CURRENT_FILE_ID,
-        'deleteButton' => Constants::$AJAX_JS_DELETE_BUTTON_ID,
+        'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,
         'current_post_id' => $post->ID
       )
     );
