@@ -110,8 +110,6 @@ class Filter extends \WP_Widget {
   }
 
   private function filter_ajax_js_localization($script_id) {
-    global $post;
-
     return array(
       $script_id,
       'ajaxLocalData',

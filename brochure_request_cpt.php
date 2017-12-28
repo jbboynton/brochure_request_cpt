@@ -49,12 +49,12 @@ add_action('widgets_init', function() {
 });
 
 register_activation_hook(__FILE__, function() {
-	Activation::activate();
+  Activation::activate();
   flush_rewrite_rules();
 });
 
 register_deactivation_hook(__FILE__, function() {
-	Activation::deactivate();
+  Activation::deactivate();
   flush_rewrite_rules();
 });
 

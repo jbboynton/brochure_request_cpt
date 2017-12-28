@@ -33,6 +33,7 @@ class AdminUI {
 
     $meta_boxes = $wp_meta_boxes[get_current_screen()->id];
 
+    // Remove social sharing and revslider from Brochure edit screen
     if ($post_type == Constants::$POST_TYPE_NAME) {
       unset($wp_meta_boxes[get_current_screen()->id]['advanced']['high']['A2A_SHARE_SAVE_meta']);
       unset($wp_meta_boxes[get_current_screen()->id]['normal']['default']['mymetabox_revslider_0']);

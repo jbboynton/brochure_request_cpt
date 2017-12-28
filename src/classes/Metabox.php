@@ -7,15 +7,15 @@ use JB\BRC\Brochure;
 
 class Metabox {
 
-  private $post_id = null;
+  private $post_id = '';
   private $post_types = [];
   private $meta_data = [];
 
   public function __construct() {
-		add_action('post_edit_form_tag', array($this, 'add_enctype'));
-		add_action('add_meta_boxes', array($this, 'add_meta_box'));
-		add_action('save_post', array($this, 'save'));
-	}
+    add_action('post_edit_form_tag', array($this, 'add_enctype'));
+    add_action('add_meta_boxes', array($this, 'add_meta_box'));
+    add_action('save_post', array($this, 'save'));
+  }
 
   public function add_enctype() {
     echo ' enctype="multipart/form-data"';

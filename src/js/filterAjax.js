@@ -8,44 +8,33 @@
   $(document).ready(function() {
 
     $("#" + ajaxLocalData.brandsForm).change(function() {
-      var brandsForm = $("#" + ajaxLocalData.brandsForm);
-      var termID = brandsForm.find("option:selected").val();
-      var spinnerContainer = $("#spinner-container");
-      var postsContainer = $("#posts-container");
-
-      $.ajax({
-        url: ajaxLocalData.ajaxURL,
-        type: brandsForm.attr('method'),
-        beforeSend: function(xhr) {
-          addSpinner(spinnerContainer);
-        },
-        data: {
-          action: brandsForm.attr('action'),
-          termID: termID
-        },
-        success: function(response) {
-          $(document.body).trigger('post-load');
-          removeSpinner(spinnerContainer);
-          postsContainer.html(response);
-        }
-      });
+      parseFilters($(this));
     });
 
     $("#" + ajaxLocalData.productCategoriesForm).change(function() {
-      var productCategoriesForm = $("#" + ajaxLocalData.productCategoriesForm);
-      var termID = productCategoriesForm.find("option:selected").val();
+      parseFilters($(this));
+    });
+
+    function parseFilters(changedForm) {
       var spinnerContainer = $("#spinner-container");
       var postsContainer = $("#posts-container");
 
+      var brandsForm = $("#" + ajaxLocalData.brandsForm);
+      var productCategoriesForm = $("#" + ajaxLocalData.productCategoriesForm);
+
+      var brandTermID = brandsForm.find("option:selected").val();
+      var productTermID = productCategoriesForm.find("option:selected").val();
+
       $.ajax({
         url: ajaxLocalData.ajaxURL,
-        type: productCategoriesForm.attr('method'),
+        type: changedForm.attr('method'),
         beforeSend: function(xhr) {
           addSpinner(spinnerContainer);
         },
         data: {
-          action: productCategoriesForm.attr('action'),
-          termID: termID
+          action: changedForm.attr('action'),
+          brand_term_id: brandTermID,
+          product_term_id: productTermID
         },
         success: function(response) {
           $(document.body).trigger('post-load');
@@ -53,7 +42,7 @@
           postsContainer.html(response);
         }
       });
-    });
+    }
 
     function addSpinner(container) {
       var spinner = container.children('.spinner');

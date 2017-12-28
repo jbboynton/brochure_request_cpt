@@ -8,7 +8,7 @@ class Sidebar {
     $sidebar_with_filter_args = $this->sidebar_with_filter_args();
 
     register_sidebar($sidebar_with_filter_args);
-	}
+  }
 
   private function sidebar_with_filter_args() {
     return array(

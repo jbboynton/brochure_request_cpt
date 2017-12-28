@@ -8,6 +8,7 @@ class Constants {
   public static $POST_TYPE_NAME = 'brochure';
   public static $DESCRIPTION =
     'A custom post type for representing brochures and catalogs.';
+  public static $POST_ARCHIVE_REL_URL = '/resources/brochures';
 
   // Templates
   public static $ARCHIVE_TEMPLATE_PATH =
@@ -48,17 +49,15 @@ class Constants {
 
   // Filter (UI component)
   public static $FILTER_UI_FORM_CLASS = 'brc_brochures_filter_form';
+  public static $FILTER_UI_ACTION = 'brc_filter_brochures';
 
   public static $FILTER_UI_BRANDS_ID = 'brc_brands_filter';
   public static $FILTER_UI_BRANDS_NAME = 'brc_brands_filter';
-  public static $FILTER_UI_BRANDS_ACTION = 'brc_filter_by_brand';
 
   public static $FILTER_UI_PRODUCT_CATEGORIES_ID =
     'brc_product_categories_filter';
   public static $FILTER_UI_PRODUCT_CATEGORIES_NAME =
     'brc_product_categories_filter';
-  public static $FILTER_UI_PRODUCT_CATEGORIES_ACTION =
-    'brc_filter_by_product_category';
 
   // Filter AJAX
   public static $FILTER_AJAX_JS_ID = 'brc_filter_js';

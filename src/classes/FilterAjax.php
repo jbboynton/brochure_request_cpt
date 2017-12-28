@@ -1,63 +1,99 @@
 <?php
 
+/**
+ * FilterAjax.php
+ * Handles AJAX requests from the Brochures archive page. Determines what posts
+ * are requested, and retrieves them from a custom `WP_Query`.
+ */
+
 namespace JB\BRC;
+
+use JB\BRC\Helpers;
 
 class FilterAjax {
 
+  private $brand_term_ids = array();
+  private $product_term_ids = array();
+  private $url_base = '';  // The relative path to the brochures archive page
+
   public function __construct() {
-    // Filter by brand
-    add_action('wp_ajax_brc_filter_by_brand',
-      array($this, 'brc_filter_by_brand'));
-    add_action('wp_ajax_nopriv_brc_filter_by_brand',
-      array($this, 'brc_filter_by_brand'));
+    $this->url_base = Constants::$POST_ARCHIVE_REL_URL;
 
-    // Filter by product category
-    add_action('wp_ajax_brc_filter_by_product_category',
-      array($this, 'brc_filter_by_product_category'));
-    add_action('wp_ajax_nopriv_brc_filter_by_product_category',
-      array($this, 'brc_filter_by_product_category'));
+    add_action('wp_ajax_brc_filter_brochures',
+      array($this, 'brc_filter_brochures'));
+    add_action('wp_ajax_nopriv_brc_filter_brochures',
+      array($this, 'brc_filter_brochures'));
   }
 
-  public function brc_filter_by_brand() {
-    $taxonomy = 'brands';
-    $this->build_filtered_posts($taxonomy);
+  public function brc_filter_brochures() {
+    $this->set_term_ids();
+    $this->build_filtered_posts();
 
     wp_die();
   }
 
-  public function brc_filter_by_product_category() {
-    $taxonomy = 'product_categories';
-    $this->build_filtered_posts($taxonomy);
+  private function set_term_ids() {
+    $brand_term_id = $_POST['brand_term_id'];
+    $product_term_id = $_POST['product_term_id'];
 
-    wp_die();
-  }
-
-  private function build_filtered_posts($taxonomy) {
-    $term_id = $_POST['termID'];
-
-    if ($term_id == -1) {
-      $term_id = $this->get_all_term_ids($taxonomy);
+    if ($brand_term_id == -1) {
+      $this->brand_term_ids = $this->get_all_term_ids('brands');
+    } else {
+      $this->brand_term_ids = $brand_term_id;
     }
 
-    $args = $this->build_filtered_posts_query_args($taxonomy, $term_id);
+    if ($product_term_id == -1) {
+      $this->product_term_ids = $this->get_all_term_ids('product_categories');
+    } else {
+      $this->product_term_ids = $product_term_id;
+    }
+  }
 
-		$query = new \WP_Query($args);
+  /**
+   * build_filtered_posts function
+   *
+   * Extracts the term IDs from the `$_POST` global for both taxonomies. If the
+   * term ID is -1, then all terms are returned for that specific taxonomy.
+   * The term ID (or IDs) is saved in an instance variable.
+   *
+   * The custom query occurs in this method as well. The query arguments are
+   * returned from a private method, and then the new query is instantiated. The
+   * loop requires in template files.
+   */
+  private function build_filtered_posts() {
+    global $wp_query;
 
-		if ($query->have_posts()) {
-      while ($query->have_posts()) {
-        $query->the_post();
+    $args = $this->build_filtered_posts_query_args();
+    $wp_query = new \WP_Query($args);
 
-        require plugin_dir_path(dirname(__DIR__)) .
-          'templates/partials/brochure.php';
-      }
+    /**
+     * To fix the pagination URL, the `$_SERVER['REQUEST_URI']` variable needs
+     * to be set to whatever page is making this AJAX request. In this case, the
+     * filter on the archive page is making this request, so we can overwrite
+     * the `REQUEST_URI` value to the relative path to the archive page. Below,
+     * `REQUEST_URI` is reset to its initial value.
+     */
+    $original_request_uri = $this->overwrite_request_uri();
 
-			wp_reset_postdata();
+    if ($wp_query->have_posts()) {
+      require plugin_dir_path(dirname(__DIR__)) .
+        'templates/partials/brochure_post_loop.php';
     } else {
       require plugin_dir_path(dirname(__DIR__)) .
         'templates/partials/none.php';
     }
+
+    $this->overwrite_request_uri($original_request_uri);
   }
 
+  /**
+   * get_all_term_ids function
+   *
+   * Takes the name of a taxonomy as a parameter, and then returns the
+   * corresponding `WP_Term` objects for each of its terms. Then, the terms are
+   * looped over, and each term's ID is saved in a new array. The array of term
+   * IDs is returned.
+   */
   private function get_all_term_ids($taxonomy) {
     $args = array(
       'taxonomy' => $taxonomy,
@@ -65,26 +101,60 @@ class FilterAjax {
     );
 
     $all_terms = get_terms($args);
+    $all_term_ids = array();
 
-    $all_term_ids = array_map(function($term) {
-      return $term->term_id;
-    }, $all_terms);
+    foreach ($all_terms as $term) {
+      $all_term_ids[] = $term->term_id;
+    }
 
     return $all_term_ids;
   }
 
-  private function build_filtered_posts_query_args($taxonomy, $term_id) {
+  /**
+   * build_filtered_posts_query_args function
+   *
+   * Returns the arguments for the custom `WP_Query`.
+   */
+  private function build_filtered_posts_query_args() {
+
+    /**
+     * Pagination arguments here included here. When you land on the brochures
+     * archive page, the pagination works as expected. As far as I know, the
+     * only time this fails is when you select one of the filter options, then
+     * try to reselect "All Brands" or "All Product Categories".
+     *
+     * I've debugged the contents of the `$loop` variable - it seems to be
+     * finding the correct number of posts, but it's not able to paginate them.
+     */
+    $paged = (get_query_var('paged') ? get_query_var('paged') : 1);
+    // $paged = 1;
+
     return array(
       'post_type' => Constants::$POST_TYPE_NAME,
       'orderby' => 'date',
+      'posts_per_archive_page' => 12,
+      'paged' => $paged,
       'tax_query' => array(
+        'relation' => 'AND',
         array(
-          'taxonomy' => $taxonomy,
-          'terms' => $term_id
+          'taxonomy' => 'brands',
+          'terms' => $this->brand_term_ids
+        ),
+        array(
+          'taxonomy' => 'product_categories',
+          'terms' => $this->product_term_ids
         )
       )
     );
   }
 
-}
+  private function overwrite_request_uri($new_uri = '') {
+    $new_uri = ($new_uri != '' ? $new_uri : $this->url_base);
+    $original_request_uri = $_SERVER['REQUEST_URI'];
 
+    $_SERVER['REQUEST_URI'] = $new_uri;
+
+    return $original_request_uri;
+  }
+
+}

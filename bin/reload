@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# This script will reload the plugin for you when you make changes. For example,
+# if you changed a CSS style and wanted to see that change in the browser, you
+# would run this script, and then your changes will be synced over to the
+# website.
+
+# --- Delete from this line, including this line --- #
+echo
+echo
+read -r -d '' msg << EOM
+
+!!! NICK, READ THIS.
+--------------------
+
+1. You need to CHANGE this script before running it for the first time. If you
+   don't change it, it's not going to work.
+
+   => Run a search/replace on this script.
+     --> Search for:    %&%cleary_site_directory%&%
+     --> Replace with:  example/path/to/the/cleary/repo/site
+
+   Replace the search string with whatever the ACTUAL PATH to the SITE DIRECTORY
+   in the Cleary repo is on your computer.
+
+2. Once you've made the CHANGE (see #1), you don't need this message anymore.
+
+   => Comment out (or delete) lines 8 - 41.
+
+3. When you're done making changes, you'll notice that you have a ton of
+   commits, all with the commit message, "deploy".  Don't worry about that - you
+   just have to rebase them all down into one commit, and force push it. Let me
+   know if you need help cleaning up the commit mess.
+
+EOM
+
+echo "$msg"
+echo
+read -n 1 -s -r -p "Press any key to exit..."
+exit
+# --- Delete up to this line, including this line --- #
+>>>>>>> Add reload script
+echo
+
+error_out() {
+  echo
+  echo "###############"
+  echo "# ----------- #"
+  echo "# !! Error !! #"
+  echo "# ----------- #"
+  echo "###############"
+  echo
+  echo "# !! Couldn't change into the specified directory (should point to the "
+  echo "# !! Cleary site directory)."
+  echo
+  echo "Exiting..."
+  exit 1
+}
+
+echo
+echo "Reloading plugin..."
+echo
+
+echo "Commiting and pushing to GitHub..."
+echo
+git add .
+git commit -m "deploy"
+git push origin 0.1.0-beta1
+
+echo
+echo "Pulling new dependencies into dev site..."
+echo
+cd %&%cleary_site_directory%&% &>/dev/null || error_out
+
+if [ ! -f ./composer.json ]; then
+  error_out
+fi
+
+composer update
+cd - &>/dev/null
+
+echo
+echo "Plugin reloaded."
+echo
+
+sh ./bin/prod
+
+exit 0
