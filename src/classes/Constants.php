@@ -8,7 +8,7 @@ class Constants {
   public static $POST_TYPE_NAME = 'brochure';
   public static $DESCRIPTION =
     'A custom post type for representing brochures and catalogs.';
-  public static $POST_ARCHIVE_REL_URL = '/resources/brochures';
+  public static $POST_ARCHIVE_REL_URL = 'resources/brochures';
 
   // Templates
   public static $ARCHIVE_TEMPLATE_PATH =
