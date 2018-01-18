@@ -5,9 +5,9 @@
 
 ## Templates that need styling
 
-- [ ] `templates/archive-brochure.php`
-- [ ] `templates/archive-sidebar.php`
-- [ ] `templates/partials/brochure.php`
-- [ ] `templates/partials/brochure_post_loop.php`
+- [X] `templates/archive-brochure.php`
+- [X] `templates/archive-sidebar.php`
+- [X] `templates/partials/brochure.php`
+- [X] `templates/partials/brochure_post_loop.php`
 - [ ] `templates/partials/none.php`
 - [ ] `templates/partials/pagination.php`
