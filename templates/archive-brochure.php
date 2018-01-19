@@ -6,7 +6,7 @@
 
 use JB\BRC\Helpers;
 
-// global $wp_query;
+global $wp_query;
 
 $paged = (get_query_var('paged') ? get_query_var('paged') : 1);
 $args = array(
@@ -14,7 +14,7 @@ $args = array(
   'posts_per_archive_page' => 12,
   'paged' => $paged
 );
-$GLOBALS['wp_query'] = new \WP_Query($args);
+$wp_query = new \WP_Query($args);
 
 get_header(); ?>
   <div class="container">
