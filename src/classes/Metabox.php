@@ -38,7 +38,7 @@ class Metabox {
     $delete_button_enabled = ($meta_data ? "enabled" : "disabled");
 
     ob_start();
-    include plugin_dir_path(dirname(__DIR__)) .
+    include plugin_dir_path(dirname(__FILE__)) .
       'templates/partials/metabox.php';
     $output = ob_get_contents();
     ob_end_clean();

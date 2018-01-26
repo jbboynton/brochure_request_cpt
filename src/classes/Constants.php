@@ -12,18 +12,21 @@ class Constants {
 
   // Templates
   public static $ARCHIVE_TEMPLATE_PATH =
-    'brochure_request_cpt/templates/archive-brochure.php';
+    'brochure_request_cpt/src/templates/archive-brochure.php';
 
   // Styles
   public static $ADMIN_CSS_ID = 'brc_admin_css';
-  public static $ADMIN_CSS_PATH = 'brochure_request_cpt/src/styles/admin.css';
+  public static $ADMIN_CSS_PATH =
+    'brochure_request_cpt/assets/stylesheets/admin.css';
 
   public static $PUBLIC_CSS_ID = 'brc_public_css';
-  public static $PUBLIC_CSS_PATH = 'brochure_request_cpt/src/styles/public.css';
+  public static $PUBLIC_CSS_PATH =
+    'brochure_request_cpt/assets/stylesheets/public.css';
 
   // Media
   public static $MEDIA_JS_ID = 'brc_media_js';
-  public static $MEDIA_JS_PATH = 'brochure_request_cpt/src/js/media.js';
+  public static $MEDIA_JS_PATH =
+    'brochure_request_cpt/assets/javascripts/media.js';
 
   public static $MEDIA_JS_LAUNCH_BUTTON_ID = 'brc-launch-media-uploader-button';
   public static $MEDIA_JS_INPUT_ID = 'brc-selected-brochure-url';
@@ -36,7 +39,7 @@ class Constants {
   // Admin AJAX
   public static $ADMIN_AJAX_JS_ID = 'brc_ajax_js';
   public static $ADMIN_AJAX_JS_PATH =
-    'brochure_request_cpt/src/js/adminAjax.js';
+    'brochure_request_cpt/assets/javascripts/adminAjax.js';
   public static $ADMIN_AJAX_JS_CURRENT_FILE_ID = 'brc-current-file-url';
   public static $ADMIN_AJAX_JS_DELETE_BUTTON_ID = 'brc-delete-button';
 
@@ -62,7 +65,7 @@ class Constants {
   // Filter AJAX
   public static $FILTER_AJAX_JS_ID = 'brc_filter_js';
   public static $FILTER_AJAX_JS_PATH =
-    'brochure_request_cpt/src/js/filterAjax.js';
+    'brochure_request_cpt/assets/javascripts/filterAjax.js';
 
 }
 

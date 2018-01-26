@@ -76,10 +76,10 @@ class FilterAjax {
     $original_request_uri = $this->overwrite_request_uri();
 
     if ($wp_query->have_posts()) {
-      require plugin_dir_path(dirname(__DIR__)) .
+      require plugin_dir_path(dirname(__FILE__)) .
         'templates/partials/brochure_post_loop.php';
     } else {
-      require plugin_dir_path(dirname(__DIR__)) .
+      require plugin_dir_path(dirname(__FILE__)) .
         'templates/partials/none.php';
     }
 

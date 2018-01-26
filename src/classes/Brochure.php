@@ -25,7 +25,7 @@ class Brochure {
   }
 
   private function get_brochure_url_from_post() {
-    $brochure = $_POST[Constants::$MEDIA_JS_INPUT_ID];
+    $brochure = $_POST[Constants::$MEDIA_JS_INPUT_ID] ?? '';
     $valid_url = $this->validate_url($brochure);
 
     if (!$valid_url) {

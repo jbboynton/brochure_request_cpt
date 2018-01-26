@@ -30,7 +30,7 @@ class CustomPostType {
     global $post;
 
     if ($post->post_type == Constants::$POST_TYPE_NAME) {
-      $archive_template = plugin_dir_path(dirname(__DIR__)) .
+      $archive_template = plugin_dir_path(dirname(__FILE__)) .
         'templates/archive-brochure.php';
     }
 

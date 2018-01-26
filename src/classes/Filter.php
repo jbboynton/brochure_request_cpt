@@ -34,7 +34,7 @@ class Filter extends \WP_Widget {
     echo $args['before_widget'];
 
     ob_start();
-    include plugin_dir_path(dirname(__DIR__)) .
+    include plugin_dir_path(dirname(__FILE__)) .
       'templates/partials/filter.php';
     $output = ob_get_contents();
     ob_end_clean();
@@ -49,7 +49,7 @@ class Filter extends \WP_Widget {
     $title_name = esc_attr($this->get_field_name('title'));
 
     ob_start();
-    include plugin_dir_path(dirname(__DIR__)) .
+    include plugin_dir_path(dirname(__FILE__)) .
       'templates/partials/filter_options.php';
     $output = ob_get_contents();
     ob_end_clean();
