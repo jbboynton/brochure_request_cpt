@@ -127,7 +127,28 @@ class FilterAjax {
      * finding the correct number of posts, but it's not able to paginate them.
      */
     $paged = (get_query_var('paged') ? get_query_var('paged') : 1);
-    // $paged = 1;
+
+    /**
+     * TODO: more predictable filtering behavior
+     *
+     * This implementation assumes that any brochure will always have a
+     * value for each taxonomy - or in other words, it assumes that any given
+     * brochure will always have a brand and a product category assigned to it.
+     * This is problematic because assigning a specific brand or product
+     * category is a manual action. It's also an optional step - no warnings or
+     * validations are triggered if a brochure is missing a value for a
+     * taxonomy.
+     *
+     * This assumption that every brochure has values for all its taxonomies
+     * causes an issue in the cases where a brochure is missing one or more
+     * values for its taxonomies. Essentially, if a brochure is missing any
+     * terms, it won't be returned, even if the user is requesting to view "All
+     * Products".
+     *
+     * A better solution might be to have a way to tag any missing terms as
+     * "Uncategorized", or better yet, find a way to enforce that all taxonomies
+     * are required when the brochure is created.
+     */
 
     return array(
       'post_type' => Constants::$POST_TYPE_NAME,
