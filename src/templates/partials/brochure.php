@@ -11,7 +11,7 @@ $book_icon_url = Helpers::build_book_icon_url();
 
 ?>
 
-<div class="col-sm-4 brc-brochure-container">
+<div class="col-sm-3 brc-brochure-container">
   <a class="brc-thumbnail-wrapper" href="<?php echo $url ?>" rel="noopener noreferrer" target="_blank">
     <div class="brc-thumbnail" style="background-image: url('<?php echo $thumbnail_url ?>')">
       <div class="book_icon">

@@ -1,20 +1,20 @@
 <?php
 
 // Maintain a post index during the loop, so that we can wrap
-// each group of 3 posts in a `.row` element
-$opening_div_index = 3;
-$closing_div_index = 4;
+// each group of 4 posts in a `.row` element
+$opening_div_index = 4;
+$closing_div_index = 5;
 
 while (have_posts()) {
   the_post();
 
-  if ($opening_div_index % 3 == 0) {
+  if ($opening_div_index % 4 == 0) {
     echo '<div class="row">';
   }
 
   require plugin_dir_path(dirname(__FILE__)) . 'partials/brochure.php';
 
-  if ($closing_div_index % 3 == 0) {
+  if ($closing_div_index % 4 == 0) {
     echo '</div>';
   }
 
@@ -22,9 +22,9 @@ while (have_posts()) {
   $closing_div_index++;
 }
 
-// If the number of posts isn't a multiple of 3, add the closing
+// If the number of posts isn't a multiple of 4, add the closing
 // div tag after the loop has finished
-if ($wp_query->post_count % 3 != 0) {
+if ($wp_query->post_count % 4 != 0) {
   echo '</div>';
 }
 
