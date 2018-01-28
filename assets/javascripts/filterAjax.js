@@ -16,7 +16,7 @@
     });
 
     function parseFilters(changedForm) {
-      var spinnerContainer = $("#spinner-container");
+      var spinnerContainer = $("#brc-spinner-container");
       var postsContainer = $("#posts-container");
 
       var brandsForm = $("#" + ajaxLocalData.brandsForm);

@@ -26,7 +26,7 @@ get_header(); ?>
           </div>
         </div>
         <div class="col-md-9">
-          <div class="main-content">
+          <div class="brc-main-content">
             <div id="posts-container" class="archive">
               <?php if ($wp_query->have_posts()):
                 require plugin_dir_path(dirname(__FILE__)) . 'templates/partials/brochure_post_loop.php';

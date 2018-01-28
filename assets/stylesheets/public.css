@@ -1,62 +1,61 @@
 /* public.css */
 
-.main-content {
+.brc-main-content {
   position: relative;
 }
 
-.spinner-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* partials/brochure.php */
-.brochure-container{
+.brc-brochure-container {
   font-family: 'TeX Gyre Adventor';
   font-size: 13px;
   color: #000;
   text-align: center;
-  padding-top: 15px;
+  padding-top: 25px;
+  padding-bottom: 15px;
 }
-.brochure-container img {
-  height: 250px;
-  width: 170px;
-  margin-bottom: 5px;
+
+.brc-title,
+.brc-product-type {
+  padding-top: 7px;
+  line-height: 18px;
 }
-.the_title, .the_product_type{
-  padding: 7px 0px;
+
+.brc-product-type {
+  padding-bottom: 14px;
 }
-.the_product_type{
-  padding-top: 0px;
-  padding-bottom: 16px;
-}
-.green-download-button{
+
+.brc-download-button {
+  margin: 0 auto;
+  width: 90px;
   font-size: 10px;
-  width: 120px;
-  display: inline;
+  line-height: 10px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
-.contain-download-button{
+
+.brc-contain-download-button {
   text-align: center;
   padding-top: 2px;
 }
-.thumb_nail{
-  height: 222px;
-  width: 177px;
+
+.brc-thumbnail {
+  min-height: 222px;
+  width: 100%;
   background-repeat: no-repeat;
   background-size: contain;
-  display: inline-block;
+  background-position: center center;
+}
 
-}
-.thumb_nail:hover{
+.brc-thumbnail:hover{
   box-shadow: inset 1000px 1000px 0px rgba(21, 105, 59, 0.74);
-  animation: boxshadowshift 0.25s ;
+  animation: boxshadowshift 0.25s;
 }
-.text{
-  color:white;
+
+.brc-view-text {
+  color: white;
 }
-.wrapper .text {
-  background:rgba(21, 105, 59, 0.75);
+
+.brc-thumbnail-wrapper .brc-view-text {
+  background: rgba(21, 105, 59, 0.75);
   padding-top: 10px;
   padding-bottom: 14px;
   text-transform: uppercase;
@@ -68,22 +67,108 @@
   vertical-align: bottom;
   left: 0px;
   visibility: hidden;
-  }
-  .wrapper img{
-    position: relative;
-    width: 60px;
-    height: 50px;
-    top: 75px;
-    left: 0px;
-    visibility: hidden;
-  }
-  .wrapper {
-    display: block;
-    height: 222px;
-  }
-  .wrapper:hover .text, .wrapper:hover img {
-  visibility:visible;
-  }
+}
+
+.brc-thumbnail-wrapper img {
+  position: relative;
+  width: 60px;
+  height: 50px;
+  top: 75px;
+  left: 0px;
+  visibility: hidden;
+}
+
+.brc-thumbnail-wrapper {
+  display: block;
+  height: 222px;
+}
+
+.brc-thumbnail-wrapper:hover .brc-view-text,
+.brc-thumbnail-wrapper:hover img {
+  visibility: visible;
+}
+
+.brc-pagination-link {
+  margin-bottom: 15px;
+  color: #207e4e;
+  font-family: 'TeX Gyre Adventor';
+  text-transform: uppercase;
+}
+
+.brc-pagination-link a:hover,
+.brc-pagination-link a:focus {
+  text-decoration: none;
+}
+
+.widget_brc_post_filter {
+  padding-top: 0 !important;
+  border: none !important;
+}
+
+.brc-panel {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.brc-panel-heading {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #ececec !important;
+  border: none;
+  border-radius: 0;
+}
+
+.brc-panel-heading h3 {
+  display: inline;
+  color: #207e4e;
+  text-transform: uppercase;
+}
+
+.brc-panel-body {
+  background-color: #f2f2f2 !important;
+  padding: 17px;
+}
+
+.brc-filter-label,
+.brc-filter-select {
+  font-family: 'TeX Gyre Adventor';
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.brc-filter-label {
+  padding-bottom: 3px;
+  padding-left: 3px;
+  text-transform: uppercase;
+}
+
+.brc-filter-select {
+  color: #949292;
+}
+
+.brc-none-found {
+  padding-top: 45px;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: center;
+}
+
+.brc-none-title h3 {
+  text-transform: uppercase;
+}
+
+.brc-none-title i {
+  color: #207e4e;
+  padding-left: 2px;
+}
+
+
+.brc-none-body p {
+  font-family: 'TeX Gyre Adventor';
+  font-size: 13px;
+}
+
 
 
 /* Spinner CSS */
@@ -110,16 +195,13 @@
   animation: spinner .6s linear infinite;
 }
 
-.spinner-absolute {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -10px;
-  margin-left: -10px;
-}
 @keyframes boxshadowshift {
-  0%   {box-shadow: inset 0px 0px 0px rgba(21, 105, 59, 0.74);}
-  100% {box-shadow: inset 0px 250px 0px rgba(21, 105, 59, 0.74); }
+  0% {
+    box-shadow: inset 0px 0px 0px rgba(21, 105, 59, 0.74);
+  }
+  100% {
+    box-shadow: inset 0px 250px 0px rgba(21, 105, 59, 0.74);
+  }
 }
 
 /* Animations */
@@ -151,5 +233,20 @@
   to {
     transform: scale(0);
   }
+}
+
+/* Responsive */
+
+@media screen and (max-width: 768px) {
+
+  .brc-download-button {
+    display: block !important;
+    width: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
 }
 

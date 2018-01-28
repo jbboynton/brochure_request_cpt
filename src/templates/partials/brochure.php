@@ -1,21 +1,28 @@
 <?php
 
+use JB\BRC\Helpers;
+
 $url = get_post_meta(get_the_ID(), 'brc_brochure_url', true);
+
+$current_post = get_post();
+$thumbnail_url = Helpers::build_brochure_thumbnail_url($current_post);
+
+$book_icon_url = Helpers::build_book_icon_url();
 
 ?>
 
-<div class="col-md-4 brochure-container">
-  <a class="wrapper" href="#">
-    <div class="thumb_nail" style="background-image: url(<?php the_post_thumbnail_url(); ?>) !important; ">
+<div class="col-sm-4 brc-brochure-container">
+  <a class="brc-thumbnail-wrapper" href="<?php echo $url ?>" rel="noopener noreferrer" target="_blank">
+    <div class="brc-thumbnail" style="background-image: url('<?php echo $thumbnail_url ?>')">
       <div class="book_icon">
-        <img src="https://cleary-millwork.s3.amazonaws.com/uploads/2018/01/r_b_icon.png" alt="book-icon">
+        <img src="<?php echo $book_icon_url ?>" alt="book-icon">
       </div>
-      <p class="text">View Catalog</p>
+      <p class="brc-view-text">View Catalog</p>
     </div>
   </a>
-  <div class="the_title"><?php the_title(); ?></div>
-  <div class="the_product_type"><?php the_title(); ?></div>
-  <div class="contain-download-button">
-    <a class="menu-button button-green-dark green-download-button  " target="_blank" rel="noopener noreferrer" href="<?php echo $url ?>">Download</a>
+  <div class="brc-title"><?php the_title(); ?></div>
+  <div class="brc-product-type"><?php the_title(); ?></div>
+  <div class="brc-contain-download-button">
+    <a class="menu-button button-green-dark brc-download-button" target="_blank" rel="noopener noreferrer" href="<?php echo $url ?>">Download</a>
   </div>
 </div>

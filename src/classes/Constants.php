@@ -10,6 +10,9 @@ class Constants {
     'A custom post type for representing brochures and catalogs.';
   public static $POST_ARCHIVE_REL_URL = 'resources/brochures';
 
+  // Images
+  public static $IMAGES_DIR_REL_PATH = 'brochure_request_cpt/assets/images';
+
   // Templates
   public static $ARCHIVE_TEMPLATE_PATH =
     'brochure_request_cpt/src/templates/archive-brochure.php';
@@ -66,6 +69,21 @@ class Constants {
   public static $FILTER_AJAX_JS_ID = 'brc_filter_js';
   public static $FILTER_AJAX_JS_PATH =
     'brochure_request_cpt/assets/javascripts/filterAjax.js';
+
+  /**
+   * Helper functions
+   */
+  public static function brochure_thumbnail_rel_path() {
+    $base = self::$IMAGES_DIR_REL_PATH;
+
+    return "${base}/no-image-available.png";
+  }
+
+  public static function book_icon_rel_path() {
+    $base = self::$IMAGES_DIR_REL_PATH;
+
+    return "${base}/book-icon.png";
+  }
 
 }
 
