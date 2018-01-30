@@ -103,7 +103,7 @@ class CustomPostType {
       'filter_items_list' => 'Filter Brochures List',
       'items_list_navigation' => 'Brochures List Navigation',
       'items_list' => 'Filter Brochures List',
-      'name_admin_bar' => 'Brochures'
+      'name_admin_bar' => 'Brochure'
     );
   }
 
