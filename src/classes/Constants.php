@@ -70,6 +70,9 @@ class Constants {
   public static $FILTER_AJAX_JS_PATH =
     'brochure_request_cpt/assets/javascripts/filterAjax.js';
 
+  // Shortcode
+  public static $SHORTCODE_POST_LOOP = 'brc_post_loop';
+
   /**
    * Helper functions
    */

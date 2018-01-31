@@ -74,7 +74,6 @@ class FilterAjax {
      * `REQUEST_URI` is reset to its initial value.
      */
     $original_request_uri = $this->overwrite_request_uri();
-
     if ($wp_query->have_posts()) {
       require plugin_dir_path(dirname(__FILE__)) .
         'templates/partials/brochure_post_loop.php';

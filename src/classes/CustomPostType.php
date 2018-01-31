@@ -60,13 +60,17 @@ class CustomPostType {
       'menu_position' => 25,
       'menu_icon' => 'dashicons-format-aside',
       'capability_type' => 'post',
-      // 'capabilities' can be set, but is generated automatically if omitted
+      // 'capabilities' is generated automatically if omitted, but is included
+      // here for completeness
+      // 'capabilities' => null,
       'map_meta_cap' => null,
       'hierarchical' => false,
       'supports' => $this->supported_features,
       'taxonomies' => $this->taxonomies,
       'has_archive' => true,
-      'rewrite' => array('slug' => $relative_url),
+      // If you don't want to use the shortcode to output the page content,
+      // uncomment the following line to restore the original rewriting behavior
+      // 'rewrite' => array('slug' => $relative_url),
       'query_var' => true,
       'can_export' => true,
       'delete_with_user' => false,

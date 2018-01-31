@@ -20,11 +20,28 @@ class Filter extends \WP_Widget {
 
   public function enqueue_assets() {
     global $post_type;
+    global $post;
 
-    if ($post_type == Constants::$POST_TYPE_NAME) {
+    if ($post_type == Constants::$POST_TYPE_NAME ||
+        $this->public_assets_are_required($post, $post_type)) {
       $this->enqueue_filter_ajax();
       $this->enqueue_public_css();
     }
+  }
+
+  private function public_assets_are_required($post, $post_type) {
+    $is_brochure_post = false;
+    $has_brochure_shortcode = false;
+
+    if ($post_type == Constants::$POST_TYPE_NAME) {
+      $is_brochure_post = true;
+    }
+
+    if (has_shortcode($post->post_content, Constants::$SHORTCODE_POST_LOOP)) {
+      $has_brochure_shortcode = true;
+    }
+
+    return ($is_brochure_post || $has_brochure_shortcode);
   }
 
   public function widget($args, $instance) {
