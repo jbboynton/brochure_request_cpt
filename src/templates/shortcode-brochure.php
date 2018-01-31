@@ -1,7 +1,7 @@
 <?php
 /* Outputs the Insights Videos in an archive layout. */
+?>
 
-get_header(); ?>
 <div class="container">
   <div class="content-wrapper">
     <div class="row">
@@ -24,5 +24,4 @@ get_header(); ?>
     </div>
   </div>
 </div>
-<?php get_footer(); ?>
 
