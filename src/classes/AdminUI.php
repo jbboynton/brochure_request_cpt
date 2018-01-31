@@ -12,31 +12,57 @@ class AdminUI {
   public function __construct() {
     new Metabox();
 
-    add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'));
+    add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_public_assets'));
     add_action('in_admin_header', array($this, 'remove_screen_options'));
   }
 
-  public function enqueue_assets() {
+  public function enqueue_admin_assets() {
     global $post_type;
 
     if ($post_type == Constants::$POST_TYPE_NAME) {
-      $this->set_current_post_id();
       $this->enqueue_css();
+
+      $this->set_current_post_id();
       $this->enqueue_media();
       $this->enqueue_admin_ajax();
     }
+  }
+
+  public function enqueue_public_assets() {
+    global $post_type;
+    global $post;
+
+    if ($this->public_assets_are_required($post, $post_type)) {
+      $this->enqueue_css();
+    }
+  }
+
+  private function public_assets_are_required($post, $post_type) {
+    $is_brochure_post = false;
+    $has_brochure_shortcode = false;
+
+    if ($post_type == Constants::$POST_TYPE_NAME) {
+      $is_brochure_post = true;
+    }
+
+    if (has_shortcode($post->post_content, Constants::$SHORTCODE_POST_LOOP)) {
+      $has_brochure_shortcode = true;
+    }
+
+    return ($is_brochure_post || $has_brochure_shortcode);
   }
 
   public function remove_screen_options() {
     global $post_type;
     global $wp_meta_boxes;
 
-    $meta_boxes = $wp_meta_boxes[get_current_screen()->id];
-
     // Remove social sharing and revslider from Brochure edit screen
     if ($post_type == Constants::$POST_TYPE_NAME) {
-      unset($wp_meta_boxes[get_current_screen()->id]['advanced']['high']['A2A_SHARE_SAVE_meta']);
-      unset($wp_meta_boxes[get_current_screen()->id]['normal']['default']['mymetabox_revslider_0']);
+      $id = get_current_screen()->id;
+
+      unset($wp_meta_boxes[$id]['advanced']['high']['A2A_SHARE_SAVE_meta']);
+      unset($wp_meta_boxes[$id]['normal']['default']['mymetabox_revslider_0']);
     }
   }
 
