@@ -17,7 +17,6 @@
 
     function parseFilters(changedForm) {
       var spinnerContainer = $("#brc-spinner-container");
-      var postsContainer = $("#posts-container");
 
       var brandsForm = $("#" + ajaxLocalData.brandsForm);
       var productCategoriesForm = $("#" + ajaxLocalData.productCategoriesForm);
@@ -37,21 +36,54 @@
           product_term_id: productTermID
         },
         success: function(response) {
-          $(document.body).trigger('post-load');
           removeSpinner(spinnerContainer);
-          postsContainer.html(response);
+          insertPosts(response.html);
+          updateBrowserState(response);
         }
       });
+    }
+
+    function insertPosts(postsHtml) {
+      var postsContainer = $("#posts-container");
+      postsContainer.html(postsHtml);
+
+      // See codex.wordpress.org/AJAX_in_Plugins#The_post-load_JavaScript_Event
+      // for more info about triggering the 'post-load' event
+      $(document.body).trigger('post-load');
+    }
+
+    function updateBrowserState(ajaxResponse) {
+      document.title = ajaxResponse.pageTitle;
+
+      var currentState = {
+        "html": ajaxResponse.html,
+        "title": ajaxResponse.pageTitle,
+        "url": ajaxResponse.url
+      };
+
+      window.history.pushState(currentState, "", ajaxResponse.url);
     }
 
     function addSpinner(container) {
       var spinner = container.children('.spinner');
 
       if (!spinnerIsRunning(spinner)) {
-        !spinner.length;
         spinner = buildSpinner(container);
         animateSpinner(spinner, 'add');
       }
+    }
+
+    function spinnerIsRunning(spinner) {
+      var exists = spinner.length ? true : false;
+      var notBeingRemoved = isBeingRemoved(spinner);
+
+      return (exists && notBeingRemoved);
+    }
+
+    function isBeingRemoved(element) {
+      var beingRemoved = element.hasClass('spinner-remove') ? true : false;
+
+      return !beingRemoved;
     }
 
     function buildSpinner(container) {
@@ -61,16 +93,9 @@
       return spinner;
     }
 
-    function spinnerIsRunning(spinner) {
-      var hasLength = spinner.length ? true : false;
-      var notBeingRemoved = !spinner.hasClass('spinner-remove') ? true : false;
-
-      return (hasLength && notBeingRemoved);
-    }
-
     function removeSpinner(container, success) {
       var spinner = container.children('.spinner');
-      spinner.length;
+
       animateSpinner(spinner, 'remove', success);
     }
 
@@ -86,7 +111,6 @@
         success && success();
       }, parseFloat(container.css('animation-duration')) * 1000));
     }
-
   });
 
 })(jQuery);

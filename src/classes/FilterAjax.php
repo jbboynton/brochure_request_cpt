@@ -26,10 +26,29 @@ class FilterAjax {
   }
 
   public function brc_filter_brochures() {
+    $html = $this->build_markup();
+    $page_title = get_bloginfo('name');
+    $url = '/' . $this->url_base;
+
+    $response = array(
+      'html' => $html,
+      'title' => $page_title,
+      'url' => $url
+    );
+
+    wp_send_json($response);
+  }
+
+  private function build_markup() {
+    ob_start();
+
     $this->set_term_ids();
     $this->build_filtered_posts();
 
-    wp_die();
+    $output = ob_get_contents();
+    ob_end_clean();
+
+    return $output;
   }
 
   private function set_term_ids() {
