@@ -24,21 +24,11 @@
         frame.on('select', function() {
           var attachment = frame.state().get('selection').first().toJSON();
 
-          $("#" + mediaLocalData.inputID).val(attachment.url);
-          $("#" + mediaLocalData.previewLink).attr('href', attachment.url);
-          $("#" + mediaLocalData.previewLink).html(attachment.url);
-          $("#" + mediaLocalData.clearButton).prop('disabled', false);
+          saveBrochureToPost(attachment.url);
         });
       }
 
       frame.open();
-    });
-
-    $("#" + mediaLocalData.clearButton).click(function(e) {
-      $("#" + mediaLocalData.inputID).val("");
-      $("#" + mediaLocalData.previewLink).html("");
-      $("#" + mediaLocalData.previewLink).attr('href', "");
-      $("#" + mediaLocalData.clearButton).prop('disabled', true);
     });
   });
 
@@ -55,6 +45,34 @@
     });
 
     return mediaInstance;
+  }
+
+  function saveBrochureToPost(brochureUrl) {
+    $.ajax({
+      url: mediaLocalData.ajaxURL,
+      type: 'POST',
+      data: {
+        action: 'set_url',
+        post_id: mediaLocalData.current_post_id,
+        brochure_url: brochureUrl
+      },
+      success: function(response) {
+        $("#" + mediaLocalData.currentFile).attr('href', brochureUrl);
+        $("#" + mediaLocalData.currentFile).html(brochureUrl);
+        $("#" + mediaLocalData.deleteButton).prop('disabled', false);
+
+        showBrochureUpdateNotice(response.notice);
+      }
+    });
+  }
+
+  function showBrochureUpdateNotice(html) {
+    var parent = $("#post").before(html);
+    setTimeout(function() {
+      $(".brc-admin-notice").fadeOut(500, function() {
+        $(this).remove();
+      });
+    }, 10000);
   }
 
 })(jQuery);

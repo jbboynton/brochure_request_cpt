@@ -8,7 +8,7 @@ class Helpers {
 
   public static function admin_notice($message_text, $style = "success") {
     $html =
-      "<div class=\"notice notice-${style}\">
+      "<div class=\"notice notice-${style} brc-admin-notice\">
         <p>${message_text}</p>
       </div>";
 

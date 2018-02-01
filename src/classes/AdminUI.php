@@ -130,16 +130,22 @@ class AdminUI {
   }
 
   private function media_js_localization($script_id) {
+    global $post;
+
     return array(
       $script_id,
       'mediaLocalData',
       array(
+        'ajaxURL' => admin_url('admin-ajax.php'),
         'frameTitle' => Constants::$MEDIA_FRAME_TITLE,
         'openButton' => Constants::$MEDIA_JS_LAUNCH_BUTTON_ID,
         'frameButtonText' => Constants::$MEDIA_FRAME_BUTTON_TEXT,
         'inputID' => Constants::$MEDIA_JS_INPUT_ID,
         'previewLink' => Constants::$MEDIA_JS_PREVIEW_LINK_ID,
-        'clearButton' => Constants::$MEDIA_JS_CLEAR_BUTTON_ID
+        'clearButton' => Constants::$MEDIA_JS_CLEAR_BUTTON_ID,
+        'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,
+        'current_post_id' => $post->ID
       )
     );
   }

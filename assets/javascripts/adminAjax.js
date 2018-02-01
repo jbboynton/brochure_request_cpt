@@ -11,17 +11,28 @@
         url: ajaxLocalData.ajaxURL,
         type: 'POST',
         data: {
-          action: 'unset_brochure',
+          action: 'unset_url',
           post_id: ajaxLocalData.current_post_id
         },
         success: function(response) {
-          $("form#post").prepend(response);
+          showBrochureUpdateNotice(response.notice);
+
           $("#" + ajaxLocalData.deleteButton).prop('disabled', true);
           $("#" + ajaxLocalData.currentFile).attr('href', "");
           $("#" + ajaxLocalData.currentFile).html("");
         }
       });
     });
+
+    function showBrochureUpdateNotice(html) {
+      var parent = $("#post").before(html);
+      setTimeout(function() {
+        $(".brc-admin-notice").fadeOut(500, function() {
+          $(this).remove();
+        });
+      }, 10000);
+    }
+
   });
 
 })(jQuery);

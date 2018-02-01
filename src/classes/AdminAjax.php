@@ -7,28 +7,74 @@ use JB\BRC\Helpers;
 
 class AdminAjax {
 
+  private $key = 'brc_brochure_url';
+
   public function __construct() {
-    add_action('wp_ajax_unset_brochure', array($this, 'unset_brochure'));
+    add_action('wp_ajax_set_url', array($this, 'set_url'));
+    add_action('wp_ajax_unset_url', array($this, 'unset_url'));
   }
 
-  public function unset_brochure() {
+  public function set_url() {
+    $response = array();
     $id = $_POST['post_id'];
-    $key = 'brc_brochure_url';
+    $url = $_POST['brochure_url'];
+
+    if (update_post_meta($id, $this->key, $url)) {
+      ob_start();
+
+      $message = "File updated successfully.";
+      Helpers::admin_notice($message, "success");
+
+      $response['notice'] = ob_get_contents();
+
+      ob_end_clean();
+    } else {
+      ob_start();
+
+      $message = "Could not save the file.";
+      Helpers::admin_notice($message, "error");
+
+      $response['notice'] = ob_get_contents();
+
+      ob_end_clean();
+    }
+
+    wp_send_json($response);
+  }
+
+  public function unset_url() {
+    $response = array();
+    $id = $_POST['post_id'];
 
     // if no brochure is attached, don't try to remove any metadata
-    if ($this->check_if_brochure_exists($id, $key)) {
-      if (delete_post_meta($id, $key)) {
-        $this->success_notice();
+    if ($this->check_if_brochure_exists($id)) {
+      if (delete_post_meta($id, $this->key)) {
+        ob_start();
+
+        $message = "File removed successfully.";
+        Helpers::admin_notice($message, "success");
+
+        $response['notice'] = ob_get_contents();
+
+        ob_end_clean();
       } else {
-        $this->failed_notice();
+        ob_start();
+
+        $message = "Could not remove the current file.";
+        Helpers::admin_notice($message, "error");
+
+        $response['notice'] = ob_get_contents();
+
+        ob_end_clean();
       }
     }
 
-    wp_die();
+    // wp_die();
+    wp_send_json($response);
   }
 
-  private function check_if_brochure_exists($post_id, $key) {
-    return metadata_exists('post', $post_id, $key);
+  private function check_if_brochure_exists($post_id) {
+    return metadata_exists('post', $post_id, $this->key);
   }
 
   private function success_notice() {
