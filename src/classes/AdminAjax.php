@@ -28,6 +28,16 @@ class AdminAjax {
       $response['notice'] = ob_get_contents();
 
       ob_end_clean();
+    } elseif (get_post_meta($id, $this->key, $url) == $url) {
+      // The URL supplied is the same as the one in the database
+      ob_start();
+
+      $message = "File updated successfully.";
+      Helpers::admin_notice($message, "success");
+
+      $response['notice'] = ob_get_contents();
+
+      ob_end_clean();
     } else {
       ob_start();
 
@@ -69,22 +79,11 @@ class AdminAjax {
       }
     }
 
-    // wp_die();
     wp_send_json($response);
   }
 
   private function check_if_brochure_exists($post_id) {
     return metadata_exists('post', $post_id, $this->key);
-  }
-
-  private function success_notice() {
-    $message = "Brochure removed successfully.";
-    Helpers::admin_notice($message, "success");
-  }
-
-  private function failed_notice() {
-    $message = "<strong>Error:</strong> Could not remove the brochure.";
-    Helpers::admin_notice($message, "error");
   }
 
 }

@@ -33,8 +33,6 @@ class Constants {
 
   public static $MEDIA_JS_LAUNCH_BUTTON_ID = 'brc-launch-media-uploader-button';
   public static $MEDIA_JS_INPUT_ID = 'brc-selected-brochure-url';
-  public static $MEDIA_JS_PREVIEW_LINK_ID = 'brc-preview-link';
-  public static $MEDIA_JS_CLEAR_BUTTON_ID = 'brc-clear-selected-button';
 
   public static $MEDIA_FRAME_TITLE = 'Choose or Upload a Brochure';
   public static $MEDIA_FRAME_BUTTON_TEXT = 'Use this brochure';
@@ -86,6 +84,12 @@ class Constants {
     $base = self::$IMAGES_DIR_REL_PATH;
 
     return "${base}/book-icon.png";
+  }
+
+  public static function reference_guide_rel_path() {
+    $base = self::$IMAGES_DIR_REL_PATH;
+
+    return "${base}/reference-guide.png";
   }
 
 }

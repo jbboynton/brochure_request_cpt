@@ -45,6 +45,12 @@ class Helpers {
     return plugins_url($default_icon_path);
   }
 
+  public static function build_reference_guide_url() {
+    $image_path = Constants::reference_guide_rel_path();
+
+    return plugins_url($image_path);
+  }
+
   public static function pp($data) {
     if (is_array($data)) {
       $data = (str_replace("  ", " ", print_r($data, true)));

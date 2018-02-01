@@ -1,3 +1,103 @@
+.brc-post {
+  display: flex;
+}
+
+.brc-edit-area,
+.brc-example-area {
+  padding: 7px 14px 21px;
+  margin: 14px 7px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: 1px solid #e5e5e5;
+}
+
+.brc-example-area {
+  flex: 1 1 25%;
+}
+
+.brc-example-area img {
+  width: auto;
+  max-height: 450px;
+}
+
+.brc-edit-area {
+  flex: 5 5 auto;
+}
+
+h3.brc-heading {
+  font-size: 13px;
+}
+
+.brc-edit-flex-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.brc-label-group,
+.brc-field-group {
+  margin: 14px 7px;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.brc-label-group {
+  flex: 1 1 25%;
+}
+
+.brc-button-group {
+  margin-top: 3px;
+}
+
+.brc-field-group {
+  flex: 4 4 auto;
+}
+
+.brc-button {
+  padding-bottom: 3px;
+  box-shadow: 0 1px 0 #0085ba;
+  outline-color: rgb(16, 137, 186);
+  border-color: #0085ba #006799 #006799;
+  border-width: 3px 1px 1px;
+  border-radius: 3px;
+  border-style: solid;
+  background-color: #0085ba;
+  color: #fff;
+  text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+  cursor: pointer;
+  transition: all 0.05s ease-in-out;
+}
+
+.brc-button:hover,
+.brc-button:active {
+  border-color: #008ec2 #006799 #006799;
+  background-color: #008ec2;
+}
+
+.brc-button-text {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.brc-delete-button {
+  box-shadow: 0 1px 0 #a00;
+  outline-color: rgb(183, 13, 13);
+  border-color: #a00 #770000 #770000;
+  background-color: #a00;
+  text-shadow: 0 -1px 1px #a00, 1px 0 1px #a00, 0 1px 1px #a00, -1px 0 1px #a00;
+}
+
+.brc-delete-button:hover,
+.brc-delete-button:active {
+  border-color: #C22C2C #770000 #770000;
+  background-color: #C22C2C;
+}
+
+.brc-delete-button:disabled {
+  opacity: .65;
+  pointer-events: none;
+}
+
 .monospace-styled {
   font: normal 12px monospace;
   color: #bc352c;
@@ -5,17 +105,15 @@
   padding-right: 2px;
 }
 
-.current-brochure-area {
-  display: block;
-  border: 1px solid #e5e5e5;
-  padding: 15px 8px;
-  margin: 14px auto;
-}
-
 .unset-brochure-form {
   display: inline;
 }
 
-.brochure-link-group {
-  margin-bottom: 17px;
+@media screen and (max-width: 768px) {
+
+  .brc-example-area,
+  .brc-edit-area {
+    width: 100%;
+  }
+
 }
