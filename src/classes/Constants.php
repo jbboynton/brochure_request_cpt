@@ -8,7 +8,7 @@ class Constants {
   public static $POST_TYPE_NAME = 'brochure';
   public static $DESCRIPTION =
     'A custom post type for representing brochures and catalogs.';
-  public static $POST_ARCHIVE_REL_URL = 'resources/brochures';
+  public static $POST_ARCHIVE_REL_URL = 'resources/brochures-catalogs';
 
   // Images
   public static $IMAGES_DIR_REL_PATH = 'brochure_request_cpt/assets/images';
@@ -26,6 +26,10 @@ class Constants {
   public static $PUBLIC_CSS_PATH =
     'brochure_request_cpt/assets/stylesheets/public.css';
 
+  public static $SPINNER_CSS_ID = 'brc_spinner_css';
+  public static $SPINNER_CSS_PATH =
+    'brochure_request_cpt/assets/stylesheets/spinner.css';
+
   // Media
   public static $MEDIA_JS_ID = 'brc_media_js';
   public static $MEDIA_JS_PATH =
@@ -33,8 +37,6 @@ class Constants {
 
   public static $MEDIA_JS_LAUNCH_BUTTON_ID = 'brc-launch-media-uploader-button';
   public static $MEDIA_JS_INPUT_ID = 'brc-selected-brochure-url';
-  public static $MEDIA_JS_PREVIEW_LINK_ID = 'brc-preview-link';
-  public static $MEDIA_JS_CLEAR_BUTTON_ID = 'brc-clear-selected-button';
 
   public static $MEDIA_FRAME_TITLE = 'Choose or Upload a Brochure';
   public static $MEDIA_FRAME_BUTTON_TEXT = 'Use this brochure';
@@ -44,7 +46,25 @@ class Constants {
   public static $ADMIN_AJAX_JS_PATH =
     'brochure_request_cpt/assets/javascripts/adminAjax.js';
   public static $ADMIN_AJAX_JS_CURRENT_FILE_ID = 'brc-current-file-url';
+  public static $ADMIN_AJAX_JS_CURRENT_ISSUU_ID = 'brc-current-issuu-url';
+  public static $ADMIN_AJAX_JS_CURRENT_TITLE_ID = 'brc-current-title-url';
+  public static $ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID = 'brc-current-subtitle-url';
   public static $ADMIN_AJAX_JS_DELETE_BUTTON_ID = 'brc-delete-button';
+
+  // Request AJAX
+  public static $REQUEST_AJAX_ID = 'brc_request_ajax_js';
+  public static $REQUEST_AJAX_PATH =
+    'brochure_request_cpt/assets/javascripts/requestAjax.js';
+
+  // Modal JS
+  public static $MODAL_JS_ID = 'brc_bs_modal_js';
+  public static $MODAL_JS_PATH =
+    'brochure_request_cpt/assets/javascripts/bootstrap-modal.js';
+
+  // Cookie JS
+  public static $COOKIE_JS_ID = 'brc_bs_cookie_js';
+  public static $COOKIE_JS_PATH =
+    'brochure_request_cpt/assets/javascripts/js-cookie.js';
 
   // Filter (widget info)
   public static $FILTER_ID = 'brc_post_filter';
@@ -86,6 +106,12 @@ class Constants {
     $base = self::$IMAGES_DIR_REL_PATH;
 
     return "${base}/book-icon.png";
+  }
+
+  public static function reference_guide_rel_path() {
+    $base = self::$IMAGES_DIR_REL_PATH;
+
+    return "${base}/reference-guide.png";
   }
 
 }

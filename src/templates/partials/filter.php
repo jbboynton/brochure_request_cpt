@@ -8,7 +8,7 @@ use JB\BRC\Helpers;
 <div class="panel panel-default brc-panel">
   <div class="panel-heading brc-panel-heading">
     <h3 class="panel-title">Filters</h3>
-    <span id="brc-spinner-container" class="pull-right"></span>
+    <span id="brc-spinner-container-filter" class="pull-right"></span>
   </div>
   <div class="panel-body brc-panel-body">
     <form action="<?php echo Constants::$FILTER_UI_ACTION ?>" class="<?php echo Constants::$FILTER_UI_FORM_CLASS ?>" id="<?php echo Constants::$FILTER_UI_PRODUCT_CATEGORIES_ID ?>" method="POST">

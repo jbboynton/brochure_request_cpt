@@ -19,22 +19,199 @@
   line-height: 18px;
 }
 
-.brc-product-type {
-  padding-bottom: 14px;
-}
-
-.brc-download-button {
+.brc-request-button {
+  background-color: #257aaf;
+  color: #fff;
   margin: 0 auto;
   width: 90px;
   font-size: 10px;
-  line-height: 10px;
+  line-height: 13px;
   padding-top: 9px;
   padding-bottom: 9px;
+  cursor: pointer;
 }
 
-.brc-contain-download-button {
+.brc-request-button:hover {
+  background-color: #559b7c;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.brc-request-button.brc-cancel {
+  background-color: #fff;
+  color: #7D807B;
+}
+
+.brc-request-button.brc-cancel:hover {
+  background-color: #e5e5e5;
+}
+
+.brc-request-submit,
+.brc-cancel {
+  display: inline-block;
+  font-family: 'TeX Gyre Adventor';
+  text-transform: uppercase;
+  width: auto;
+}
+
+.brc-request-wrapper {
   text-align: center;
-  padding-top: 2px;
+  padding-top: 7px;
+}
+
+.brc-row-flex {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
+}
+
+.brc-request-all {
+  display: flex;
+}
+
+.brc-request-all,
+.brc-page-title {
+  align-items: center;
+}
+
+.brc-request-all .brc-request-button {
+  display: inline-block;
+  cursor: pointer;
+  width: auto;
+  font-family: 'TeX Gyre Adventor';
+  text-align: center;
+  margin: 20px auto;
+}
+
+#brc-spinner-container {
+  margin-left: 20px;
+}
+
+.brc-modal-header {
+  border-bottom: none;
+  padding-left: 35px;
+}
+
+.brc-modal-body,
+.brc-modal-footer {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+.brc-modal-footer {
+  padding-bottom: 35px;
+  border-top: none;
+}
+
+p.brc-ready-to-order {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+h4.brc-modal-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  padding-top: 30px;
+}
+
+ul.brc-requested-catalogs {
+  list-style: none;
+  font-family: 'TeX Gyre Adventor';
+  font-size: 16px;
+}
+
+.brc-flex-li::before {
+  display: none;
+}
+
+.brc-flex-li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brc-li-icon,
+.brc-li-item-name,
+form.brc-li-form {
+  display: flex;
+  align-items: baseline;
+}
+
+.brc-li-icon {
+  flex: 0 1 25px;
+  cursor: pointer;
+}
+
+.brc-li-icon i,
+.brc-li-icon i::before {
+  pointer-events: inherit;
+}
+
+.brc-li-item-name {
+  flex: 3 3 auto;
+}
+
+form.brc-li-form {
+  flex: 0 1 auto;
+}
+
+form.brc-li-form .form-group {
+  display: flex;
+  align-items: baseline;
+}
+
+form.brc-li-form label {
+  font-family: 'TeX Gyre Adventor';
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.brc-shipping-info label,
+.brc-shipping-info input {
+  font-family: 'TeX Gyre Adventor';
+  font-size: 12px;
+  font-weight: normal;
+}
+
+
+.brc-li-text {
+  max-width: 50px;
+  margin-left: 25px;
+  text-align: center;
+}
+
+.brc-total {
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.brc-li-total {
+  font-weight: 600;
+}
+
+.brc-li-total-qty {
+  max-width: 50px;
+  width: 100%;
+  margin-left: 25px;
+}
+
+.brc-request-all .brc-request-button:disabled {
+  background-color: #ececec;
+}
+
+.brc-selected {
+  background-color: #559b7c;
+}
+
+.brc-counter {
+  display: none;
+  font-size: 10px;
+  background-color: #f31519;
+  padding: 1px 7px;
 }
 
 .brc-thumbnail {
@@ -169,84 +346,13 @@
   font-size: 13px;
 }
 
-
-
-/* Spinner CSS */
-
-@keyframes spinner {
-  to {
-    transform: rotate(360deg);
-  }
+.brc-links-wrapper {
+  text-align: center;
+  padding-top: 7px;
 }
 
-.spinner,
-.spinner:before {
-  width: 20px;
-  height: 20px;
-  box-sizing: border-box;
+h1.brc-page-title {
+  font-size: 36px;
+  margin: 0;
+  display: inline-flex;
 }
-
-.spinner:before {
-  content: '';
-  display: block;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  border-top-color: #333;
-  animation: spinner .6s linear infinite;
-}
-
-@keyframes boxshadowshift {
-  0% {
-    box-shadow: inset 0px 0px 0px rgba(21, 105, 59, 0.74);
-  }
-  100% {
-    box-shadow: inset 0px 250px 0px rgba(21, 105, 59, 0.74);
-  }
-}
-
-/* Animations */
-
-.spinner-add,
-.spinner-remove {
-  animation-fill-mode: both;
-  animation-duration: .4s;
-}
-
-.spinner-add {
-  animation-name: spinner-add;
-}
-
-@keyframes spinner-add {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.spinner-remove {
-  animation-name: spinner-remove;
-}
-
-@keyframes spinner-remove {
-  to {
-    transform: scale(0);
-  }
-}
-
-/* Responsive */
-
-@media screen and (max-width: 768px) {
-
-  .brc-download-button {
-    display: block !important;
-    width: 120px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 12px;
-    line-height: 12px;
-  }
-
-}
-

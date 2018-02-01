@@ -1,0 +1,79 @@
+/* Spinner CSS */
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.brc-spinner,
+.brc-spinner:before {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.brc-spinner:before {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
+}
+
+@keyframes boxshadowshift {
+  0% {
+    box-shadow: inset 0px 0px 0px rgba(21, 105, 59, 0.74);
+  }
+  100% {
+    box-shadow: inset 0px 250px 0px rgba(21, 105, 59, 0.74);
+  }
+}
+
+/* Animations */
+
+.brc-spinner-add,
+.brc-spinner-remove {
+  animation-fill-mode: both;
+  animation-duration: .4s;
+}
+
+.brc-spinner-add {
+  animation-name: spinner-add;
+}
+
+@keyframes spinner-add {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.brc-spinner-remove {
+  animation-name: spinner-remove;
+}
+
+@keyframes spinner-remove {
+  to {
+    transform: scale(0);
+  }
+}
+
+/* Responsive */
+
+@media screen and (max-width: 768px) {
+
+  .brc-download-button {
+    display: block !important;
+    width: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+}
+

@@ -16,7 +16,7 @@
     });
 
     function parseFilters(changedForm) {
-      var spinnerContainer = $("#brc-spinner-container");
+      var spinnerContainer = $("#brc-spinner-container-filter");
 
       var brandsForm = $("#" + ajaxLocalData.brandsForm);
       var productCategoriesForm = $("#" + ajaxLocalData.productCategoriesForm);
@@ -53,11 +53,11 @@
     }
 
     function updateBrowserState(ajaxResponse) {
-      document.title = ajaxResponse.pageTitle;
+      document.title = "Brochures – " + ajaxResponse.title;
 
       var currentState = {
         "html": ajaxResponse.html,
-        "title": ajaxResponse.pageTitle,
+        "title": ajaxResponse.title,
         "url": ajaxResponse.url
       };
 
@@ -65,7 +65,7 @@
     }
 
     function addSpinner(container) {
-      var spinner = container.children('.spinner');
+      var spinner = container.children('.brc-spinner');
 
       if (!spinnerIsRunning(spinner)) {
         spinner = buildSpinner(container);
@@ -81,20 +81,20 @@
     }
 
     function isBeingRemoved(element) {
-      var beingRemoved = element.hasClass('spinner-remove') ? true : false;
+      var beingRemoved = element.hasClass('brc-spinner-remove') ? true : false;
 
       return !beingRemoved;
     }
 
     function buildSpinner(container) {
-      var spinner = $('<div class="spinner spinner-absolute"></div>');
+      var spinner = $('<div class="brc-spinner .brc-spinner-absolute"></div>');
       spinner.appendTo(container);
 
       return spinner;
     }
 
     function removeSpinner(container, success) {
-      var spinner = container.children('.spinner');
+      var spinner = container.children('.brc-spinner');
 
       animateSpinner(spinner, 'remove', success);
     }
@@ -105,12 +105,13 @@
         container.data('animationTimeout') && clearTimeout(container.data('animationTimeout'));
       }
 
-      container.addClass('spinner-' + animation).data('animating', 'spinner-' + animation);
+      container.addClass('brc-spinner-' + animation).data('animating', 'brc-spinner-' + animation);
       container.data('animationTimeout', setTimeout(function() {
         animation == 'remove' && container.remove();
         success && success();
       }, parseFloat(container.css('animation-duration')) * 1000));
     }
+
   });
 
 })(jQuery);

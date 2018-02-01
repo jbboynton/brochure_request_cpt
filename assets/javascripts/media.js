@@ -24,21 +24,11 @@
         frame.on('select', function() {
           var attachment = frame.state().get('selection').first().toJSON();
 
-          $("#" + mediaLocalData.inputID).val(attachment.url);
-          $("#" + mediaLocalData.previewLink).attr('href', attachment.url);
-          $("#" + mediaLocalData.previewLink).html(attachment.url);
-          $("#" + mediaLocalData.clearButton).prop('disabled', false);
+          saveBrochureToPost(attachment.url);
         });
       }
 
       frame.open();
-    });
-
-    $("#" + mediaLocalData.clearButton).click(function(e) {
-      $("#" + mediaLocalData.inputID).val("");
-      $("#" + mediaLocalData.previewLink).html("");
-      $("#" + mediaLocalData.previewLink).attr('href', "");
-      $("#" + mediaLocalData.clearButton).prop('disabled', true);
     });
   });
 
@@ -55,6 +45,94 @@
     });
 
     return mediaInstance;
+  }
+
+  function basename(path) {
+    return path.split(/[\\/]/).pop();
+  }
+
+  function saveBrochureToPost(brochureUrl) {
+    var spinnerContainer = $("#brc-spinner-container");
+
+    $.ajax({
+      url: mediaLocalData.ajaxURL,
+      type: 'POST',
+      beforeSend: function(xhr) {
+        addSpinner(spinnerContainer);
+      },
+      data: {
+        action: 'set_url',
+        post_id: mediaLocalData.current_post_id,
+        brochure_url: brochureUrl
+      },
+      success: function(response) {
+        var base = basename(brochureUrl);
+
+        removeSpinner(spinnerContainer);
+        $("#" + mediaLocalData.currentFile).attr('href', base);
+        $("#" + mediaLocalData.currentFile).html(base);
+        $("#" + mediaLocalData.deleteButton).prop('disabled', false);
+
+        showBrochureUpdateNotice(response.notice);
+      }
+    });
+  }
+
+  function showBrochureUpdateNotice(html) {
+    var parent = $("#post").before(html);
+    setTimeout(function() {
+      $(".brc-admin-notice").fadeOut(500, function() {
+        $(this).remove();
+      });
+    }, 10000);
+  }
+
+  function addSpinner(container) {
+    var spinner = container.children('.spinner');
+
+    if (!spinnerIsRunning(spinner)) {
+      spinner = buildSpinner(container);
+      animateSpinner(spinner, 'add');
+    }
+  }
+
+  function spinnerIsRunning(spinner) {
+    var exists = spinner.length ? true : false;
+    var notBeingRemoved = isBeingRemoved(spinner);
+
+    return (exists && notBeingRemoved);
+  }
+
+  function isBeingRemoved(element) {
+    var beingRemoved = element.hasClass('spinner-remove') ? true : false;
+
+    return !beingRemoved;
+  }
+
+  function buildSpinner(container) {
+    var spinner = $('<div class="spinner spinner-absolute"></div>');
+    spinner.appendTo(container);
+
+    return spinner;
+  }
+
+  function removeSpinner(container, success) {
+    var spinner = container.children('.spinner');
+
+    animateSpinner(spinner, 'remove', success);
+  }
+
+  function animateSpinner(container, animation, success) {
+    if (container.data('animating')) {
+      container.removeClass(container.data('animating')).data('animating', null);
+      container.data('animationTimeout') && clearTimeout(container.data('animationTimeout'));
+    }
+
+    container.addClass('spinner-' + animation).data('animating', 'spinner-' + animation);
+    container.data('animationTimeout', setTimeout(function() {
+      animation == 'remove' && container.remove();
+      success && success();
+    }, parseFloat(container.css('animation-duration')) * 1000));
   }
 
 })(jQuery);

@@ -8,7 +8,7 @@ class Helpers {
 
   public static function admin_notice($message_text, $style = "success") {
     $html =
-      "<div class=\"notice notice-${style}\">
+      "<div class=\"notice notice-${style} brc-admin-notice\">
         <p>${message_text}</p>
       </div>";
 
@@ -43,6 +43,12 @@ class Helpers {
     $default_icon_path = Constants::book_icon_rel_path();
 
     return plugins_url($default_icon_path);
+  }
+
+  public static function build_reference_guide_url() {
+    $image_path = Constants::reference_guide_rel_path();
+
+    return plugins_url($image_path);
   }
 
   public static function pp($data) {

@@ -1,27 +1,59 @@
-<form action="upload_brochure" method="POST">
-  <p class="description">Click <span class="monospace-styled">Choose Brochure</span> to select a brochure. Then, click <span class="monospace-styled">Save Changes</span>.</p>
-  <input type="button" id="<?php echo $launch_button_id; ?>" class="button" value="Choose Brochure" />
-  <input type="text" id="<?php echo $input_id; ?>" name="<?php echo $input_id; ?>" hidden />
-  <?php wp_nonce_field('save_brochure', 'brc_nonce'); ?>
-</form>
-
-<span class="current-brochure-area">
-  <div class="brochure-link-group">
-    <strong>Selected file:</strong>
-    <br>
-    <a id="<?php echo $preview_link_id; ?>" target="_blank"></a>
+<div class="brc-post">
+  <div class="brc-example-area">
+    <h3 class="brc-heading">Reference Guide</h3>
+    <img src="<?php echo $reference_guide['src'] ?>" alt="<?php echo $reference_guide['alt'] ?>" />
   </div>
 
-  <div class="brochure-link-group">
-    <strong>Current file:</strong>
-    <br>
-    <a id="<?php echo $current_file_id; ?>" target="_blank" href="<?php echo $meta_data ?>"><?php echo $meta_data ?></a>
+  <div class="brc-edit-area">
+    <div class="brc-header-group">
+      <h3 class="brc-heading">Brochure Properties</h3>
+      <span class="alignright" id="brc-spinner-container"></span>
+    </div>
+
+    <div class="brc-edit-flex-container">
+      <div class="brc-label-group">
+        <p class="description">Brochure File</p>
+      </div>
+      <div class="brc-field-group brc-current-file">
+        <a id="<?php echo $current_file_id; ?>" target="_blank" href="<?php echo $meta_data['url'] ?>"><?php echo basename($meta_data['url']) ?></a>
+        <div class="brc-button-group">
+          <button type="button" id="<?php echo $launch_button_id; ?>" class="brc-button">
+            <span class="brc-button-text">Choose</span>
+          </button>
+          <button type="button" id="<?php echo $delete_button_id; ?>" class="brc-button brc-delete-button" <?php echo $delete_button_enabled; ?>>
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="brc-edit-flex-container">
+      <div class="brc-label-group">
+        <p class="description">Issuu URL</p>
+      </div>
+      <div class="brc-field-group">
+        <input type="text" class="brc-text-input" id="<?php echo $current_issuu_id; ?>" placeholder="Enter a URL..." value="<?php echo $meta_data['issuu'] ?>" />
+      </div>
+    </div>
+
+    <div class="brc-edit-flex-container">
+      <div class="brc-label-group">
+        <p class="description">Brochure Title</p>
+      </div>
+      <div class="brc-field-group">
+        <input type="text" class="brc-text-input" id="<?php echo $current_title_id; ?>" placeholder="Enter a title..." value="<?php echo $meta_data['title'] ?>" />
+      </div>
+    </div>
+
+    <div class="brc-edit-flex-container">
+      <div class="brc-label-group">
+        <p class="description">Brochure Subtitle</p>
+      </div>
+      <div class="brc-field-group">
+        <input type="text" class="brc-text-input" id="<?php echo $current_subtitle_id; ?>" placeholder="Enter a subtitle..." value="<?php echo $meta_data['subtitle'] ?>" />
+      </div>
+    </div>
+
   </div>
 
-  <?php submit_button(); ?>
-  <input type="button" id="<?php echo $clear_button_id; ?>" class="button" value="Clear" disabled />
-  <form class="unset-brochure-form" action="unset_brochure" method="POST">
-    <input type="button" id="<?php echo $delete_button_id; ?>" class="button" value="Remove Brochure" <?php echo $delete_button_enabled; ?>/>
-  </form>
-</span>
-
+</div>

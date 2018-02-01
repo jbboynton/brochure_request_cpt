@@ -35,6 +35,9 @@ class AdminUI {
 
     if ($this->public_assets_are_required($post, $post_type)) {
       $this->enqueue_css();
+      $this->enqueue_request_ajax();
+      $this->enqueue_modal_js();
+      $this->enqueue_cookie_js();
     }
   }
 
@@ -102,6 +105,10 @@ class AdminUI {
       array(
         Constants::$PUBLIC_CSS_ID,
         plugins_url(Constants::$PUBLIC_CSS_PATH)
+      ),
+      array(
+        Constants::$SPINNER_CSS_ID,
+        plugins_url(Constants::$SPINNER_CSS_PATH)
       )
     );
   }
@@ -130,16 +137,20 @@ class AdminUI {
   }
 
   private function media_js_localization($script_id) {
+    global $post;
+
     return array(
       $script_id,
       'mediaLocalData',
       array(
+        'ajaxURL' => admin_url('admin-ajax.php'),
         'frameTitle' => Constants::$MEDIA_FRAME_TITLE,
         'openButton' => Constants::$MEDIA_JS_LAUNCH_BUTTON_ID,
         'frameButtonText' => Constants::$MEDIA_FRAME_BUTTON_TEXT,
         'inputID' => Constants::$MEDIA_JS_INPUT_ID,
-        'previewLink' => Constants::$MEDIA_JS_PREVIEW_LINK_ID,
-        'clearButton' => Constants::$MEDIA_JS_CLEAR_BUTTON_ID
+        'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,
+        'current_post_id' => $post->ID
       )
     );
   }
@@ -174,9 +185,81 @@ class AdminUI {
       array(
         'ajaxURL' => admin_url('admin-ajax.php'),
         'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'currentIssuu' => Constants::$ADMIN_AJAX_JS_CURRENT_ISSUU_ID,
+        'currentTitle' => Constants::$ADMIN_AJAX_JS_CURRENT_TITLE_ID,
+        'currentSubtitle' => Constants::$ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID,
         'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,
         'current_post_id' => $post->ID
       )
+    );
+  }
+
+  private function enqueue_request_ajax() {
+    $args = $this->request_ajax_args();
+    $id = $args[0];
+    $localized_args = $this->request_ajax_localization($id);
+
+    wp_register_script(...$args);
+    wp_localize_script(...$localized_args);
+    wp_enqueue_script($id);
+  }
+
+  private function request_ajax_args() {
+    return array(
+      Constants::$REQUEST_AJAX_ID,                 // Unique string identifier
+      plugins_url(Constants::$REQUEST_AJAX_PATH),  // Source URL
+      array('jquery'),                              // Dependencies
+      null,                                   // Version (null = not versioned)
+      false                                   // Load script in footer
+    );
+  }
+
+  private function request_ajax_localization($script_id) {
+    global $post;
+
+    return array(
+      $script_id,
+      'localized',
+      array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'currentPostId' => $post->ID
+      )
+    );
+  }
+
+  private function enqueue_modal_js() {
+    $args = $this->modal_args();
+    $id = $args[0];
+
+    wp_register_script(...$args);
+    wp_enqueue_script($id);
+  }
+
+  private function modal_args() {
+    return array(
+      Constants::$MODAL_JS_ID,
+      plugins_url(Constants::$MODAL_JS_PATH),
+      array('jquery'),
+      null,
+      false
+    );
+  }
+
+  private function enqueue_cookie_js() {
+    $args = $this->cookie_args();
+    $id = $args[0];
+
+    wp_register_script(...$args);
+    wp_enqueue_script($id);
+  }
+
+  private function cookie_args() {
+    return array(
+      Constants::$COOKIE_JS_ID,
+      plugins_url(Constants::$COOKIE_JS_PATH),
+      array('jquery'),
+      null,
+      false
     );
   }
 
