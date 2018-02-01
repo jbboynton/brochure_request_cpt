@@ -102,6 +102,10 @@ class AdminUI {
       array(
         Constants::$PUBLIC_CSS_ID,
         plugins_url(Constants::$PUBLIC_CSS_PATH)
+      ),
+      array(
+        Constants::$SPINNER_CSS_ID,
+        plugins_url(Constants::$SPINNER_CSS_PATH)
       )
     );
   }
@@ -178,6 +182,8 @@ class AdminUI {
       array(
         'ajaxURL' => admin_url('admin-ajax.php'),
         'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'currentTitle' => Constants::$ADMIN_AJAX_JS_CURRENT_TITLE_ID,
+        'currentSubtitle' => Constants::$ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID,
         'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,
         'current_post_id' => $post->ID
       )

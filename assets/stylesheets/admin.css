@@ -1,10 +1,11 @@
 .brc-post {
   display: flex;
+  flex-wrap: wrap-reverse;
 }
 
 .brc-edit-area,
 .brc-example-area {
-  padding: 7px 14px 21px;
+  padding: 17px 14px 21px;
   margin: 14px 7px;
   justify-content: space-between;
   box-sizing: border-box;
@@ -21,17 +22,26 @@
 }
 
 .brc-edit-area {
-  flex: 5 5 auto;
+  flex: 3 3 55%;
+}
+
+.brc-header-group {
+  display: block;
 }
 
 h3.brc-heading {
+  display: inline-block;
   font-size: 13px;
 }
 
 .brc-edit-flex-container {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   margin-bottom: 10px;
+}
+
+.brc-spinner-container {
+  float: right;
 }
 
 .brc-label-group,
@@ -50,7 +60,19 @@ h3.brc-heading {
 }
 
 .brc-field-group {
-  flex: 4 4 auto;
+  flex: 4 4 75%;
+}
+
+.brc-field-group.brc-current-file {
+  overflow-x: scroll;
+}
+
+input.brc-text-input {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
 }
 
 .brc-button {
@@ -114,6 +136,20 @@ h3.brc-heading {
   .brc-example-area,
   .brc-edit-area {
     width: 100%;
+  }
+
+  .brc-edit-flex-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  .brc-button-group button {
+    margin: 3px auto 8px;
+    width: 30%;
+  }
+
+  .brc-delete-button {
+    float: right;
   }
 
 }

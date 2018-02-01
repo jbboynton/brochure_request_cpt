@@ -48,20 +48,27 @@
   }
 
   function saveBrochureToPost(brochureUrl) {
+    var spinnerContainer = $("#brc-spinner-container");
+
     $.ajax({
       url: mediaLocalData.ajaxURL,
       type: 'POST',
+      beforeSend: function(xhr) {
+        addSpinner(spinnerContainer);
+      },
       data: {
         action: 'set_url',
         post_id: mediaLocalData.current_post_id,
         brochure_url: brochureUrl
       },
       success: function(response) {
+        removeSpinner(spinnerContainer);
         $("#" + mediaLocalData.currentFile).attr('href', brochureUrl);
         $("#" + mediaLocalData.currentFile).html(brochureUrl);
         $("#" + mediaLocalData.deleteButton).prop('disabled', false);
 
         showBrochureUpdateNotice(response.notice);
+        console.log(response);
       }
     });
   }
@@ -73,6 +80,54 @@
         $(this).remove();
       });
     }, 10000);
+  }
+
+  function addSpinner(container) {
+    var spinner = container.children('.spinner');
+
+    if (!spinnerIsRunning(spinner)) {
+      spinner = buildSpinner(container);
+      animateSpinner(spinner, 'add');
+    }
+  }
+
+  function spinnerIsRunning(spinner) {
+    var exists = spinner.length ? true : false;
+    var notBeingRemoved = isBeingRemoved(spinner);
+
+    return (exists && notBeingRemoved);
+  }
+
+  function isBeingRemoved(element) {
+    var beingRemoved = element.hasClass('spinner-remove') ? true : false;
+
+    return !beingRemoved;
+  }
+
+  function buildSpinner(container) {
+    var spinner = $('<div class="spinner spinner-absolute"></div>');
+    spinner.appendTo(container);
+
+    return spinner;
+  }
+
+  function removeSpinner(container, success) {
+    var spinner = container.children('.spinner');
+
+    animateSpinner(spinner, 'remove', success);
+  }
+
+  function animateSpinner(container, animation, success) {
+    if (container.data('animating')) {
+      container.removeClass(container.data('animating')).data('animating', null);
+      container.data('animationTimeout') && clearTimeout(container.data('animationTimeout'));
+    }
+
+    container.addClass('spinner-' + animation).data('animating', 'spinner-' + animation);
+    container.data('animationTimeout', setTimeout(function() {
+      animation == 'remove' && container.remove();
+      success && success();
+    }, parseFloat(container.css('animation-duration')) * 1000));
   }
 
 })(jQuery);

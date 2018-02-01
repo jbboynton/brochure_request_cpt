@@ -26,6 +26,10 @@ class Constants {
   public static $PUBLIC_CSS_PATH =
     'brochure_request_cpt/assets/stylesheets/public.css';
 
+  public static $SPINNER_CSS_ID = 'brc_spinner_css';
+  public static $SPINNER_CSS_PATH =
+    'brochure_request_cpt/assets/stylesheets/spinner.css';
+
   // Media
   public static $MEDIA_JS_ID = 'brc_media_js';
   public static $MEDIA_JS_PATH =
@@ -42,6 +46,8 @@ class Constants {
   public static $ADMIN_AJAX_JS_PATH =
     'brochure_request_cpt/assets/javascripts/adminAjax.js';
   public static $ADMIN_AJAX_JS_CURRENT_FILE_ID = 'brc-current-file-url';
+  public static $ADMIN_AJAX_JS_CURRENT_TITLE_ID = 'brc-current-title-url';
+  public static $ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID = 'brc-current-subtitle-url';
   public static $ADMIN_AJAX_JS_DELETE_BUTTON_ID = 'brc-delete-button';
 
   // Filter (widget info)
