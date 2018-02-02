@@ -32,6 +32,7 @@ class Metabox {
     $all_post_meta = get_post_meta($current_post->ID);
     $meta_data = array(
       'url' => $all_post_meta['brc_brochure_url'][0] ?? '',
+      'issuu' => $all_post_meta['brc_issuu_url'][0] ?? '',
       'title' =>
         $all_post_meta['brc_brochure_title'][0] ??
           get_the_title($current_post->ID),
@@ -46,6 +47,7 @@ class Metabox {
     $input_id = Constants::$MEDIA_JS_INPUT_ID;
     $launch_button_id = Constants::$MEDIA_JS_LAUNCH_BUTTON_ID;
     $current_file_id = Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID;
+    $current_issuu_id = Constants::$ADMIN_AJAX_JS_CURRENT_ISSUU_ID;
     $current_title_id = Constants::$ADMIN_AJAX_JS_CURRENT_TITLE_ID;
     $current_subtitle_id = Constants::$ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID;
     $delete_button_id = Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID;

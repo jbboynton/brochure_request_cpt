@@ -8,12 +8,16 @@ use JB\BRC\Helpers;
 class AdminAjax {
 
   private $url_key = 'brc_brochure_url';
+  private $issuu_key = 'brc_issuu_url';
   private $title_key = 'brc_brochure_title';
   private $subtitle_key = 'brc_brochure_subtitle';
 
   public function __construct() {
     add_action('wp_ajax_set_url', array($this, 'set_url'));
     add_action('wp_ajax_unset_url', array($this, 'unset_url'));
+
+    add_action('wp_ajax_set_issuu', array($this, 'set_issuu'));
+    add_action('wp_ajax_unset_issuu', array($this, 'unset_issuu'));
 
     add_action('wp_ajax_set_title', array($this, 'set_title'));
     add_action('wp_ajax_unset_title', array($this, 'unset_title'));
@@ -39,6 +43,38 @@ class AdminAjax {
     $id = $_POST['post_id'];
 
     $result = $this->unset_brochure_meta($id, $this->url_key);
+
+    wp_send_json($result);
+  }
+
+  public function set_issuu() {
+    $id = $_POST['post_id'];
+    $url = $_POST['issuu_url'];
+
+    if ($this->is_valid_url($url)) {
+      $result = $this->set_brochure_meta($id, $this->issuu_key, $url);
+    } else {
+      $result['error'] = true;
+      $message = "Could not set the Issuu link. Make sure your URL " .
+        "is valid and begins with <span class=monospace-styled>https</span> " .
+        "or <span class=monospace-styled>http</span>.";
+
+      ob_start();
+
+      Helpers::admin_notice($message, "error");
+
+      $result['notice'] = ob_get_contents();
+
+      ob_end_clean();
+    }
+
+    wp_send_json($result);
+  }
+
+  public function unset_issuu() {
+    $id = $_POST['post_id'];
+
+    $result = $this->unset_brochure_meta($id, $this->issuu_key);
 
     wp_send_json($result);
   }

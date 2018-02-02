@@ -39,6 +39,36 @@
       }, 10000);
     }
 
+    $("#" + ajaxLocalData.currentIssuu).blur(function() {
+      var issuuUrl = $(this).val();
+      var spinnerContainer = $("#brc-spinner-container");
+
+      if ($(this).hasClass("brc-invalid")) {
+        $(this).removeClass("brc-invalid");
+      }
+
+      $.ajax({
+        url: ajaxLocalData.ajaxURL,
+        type: 'POST',
+        beforeSend: function(xhr) {
+          addSpinner(spinnerContainer);
+        },
+        data: {
+          action: 'set_issuu',
+          post_id: ajaxLocalData.current_post_id,
+          issuu_url: issuuUrl
+        },
+        success: function(response) {
+          if (response.error) {
+            showBrochureUpdateNotice(response.notice);
+            $("#" + ajaxLocalData.currentIssuu).addClass("brc-invalid");
+          }
+
+          removeSpinner(spinnerContainer);
+        }
+      });
+    });
+
     $("#" + ajaxLocalData.currentTitle).blur(function() {
       var brochureTitle = $(this).val();
       var spinnerContainer = $("#brc-spinner-container");

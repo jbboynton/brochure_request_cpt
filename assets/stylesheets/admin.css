@@ -17,6 +17,7 @@
 }
 
 .brc-example-area img {
+  display: block;
   width: auto;
   max-height: 450px;
 }
@@ -56,7 +57,8 @@ h3.brc-heading {
 }
 
 .brc-button-group {
-  margin-top: 3px;
+  display: inline-block;
+  float: right;
 }
 
 .brc-field-group {
@@ -64,7 +66,7 @@ h3.brc-heading {
 }
 
 .brc-field-group.brc-current-file {
-  overflow-x: scroll;
+  overflow-wrap: break-word;
 }
 
 input.brc-text-input {
@@ -120,6 +122,11 @@ input.brc-text-input {
   pointer-events: none;
 }
 
+.brc-invalid {
+  border-color: #C22C2C #770000 #770000 !important;
+  box-shadow: 0 1px 0 #a00 !important;
+}
+
 .monospace-styled {
   font: normal 12px monospace;
   color: #bc352c;
@@ -129,6 +136,42 @@ input.brc-text-input {
 
 .unset-brochure-form {
   display: inline;
+}
+
+@media screen and (max-width: 1274px) {
+
+  .brc-button-group {
+    display: block;
+    float: none;
+    margin-top: 14px;
+  }
+
+}
+
+@media screen and (max-width: 1190px) {
+
+  .brc-example-area,
+  .brc-edit-area {
+    width: 100%;
+  }
+
+  .brc-edit-flex-container {
+    display: block;
+    overflow: hidden;
+  }
+
+}
+
+@media screen and (max-width: 850px) {
+
+  .brc-example-area,
+  .brc-edit-area {
+    width: auto;
+  }
+
+  .brc-edit-flex-container {
+    display: flex;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -145,11 +188,17 @@ input.brc-text-input {
 
   .brc-button-group button {
     margin: 3px auto 8px;
-    width: 30%;
+    width: auto;
   }
 
-  .brc-delete-button {
-    float: right;
+}
+
+@media screen and (max-width: 500px) {
+
+  .brc-button-group {
+    display: block;
+    float: none;
+    margin-top: 14px;
   }
 
 }

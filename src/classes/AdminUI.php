@@ -182,6 +182,7 @@ class AdminUI {
       array(
         'ajaxURL' => admin_url('admin-ajax.php'),
         'currentFile' => Constants::$ADMIN_AJAX_JS_CURRENT_FILE_ID,
+        'currentIssuu' => Constants::$ADMIN_AJAX_JS_CURRENT_ISSUU_ID,
         'currentTitle' => Constants::$ADMIN_AJAX_JS_CURRENT_TITLE_ID,
         'currentSubtitle' => Constants::$ADMIN_AJAX_JS_CURRENT_SUBTITLE_ID,
         'deleteButton' => Constants::$ADMIN_AJAX_JS_DELETE_BUTTON_ID,

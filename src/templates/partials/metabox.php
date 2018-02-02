@@ -13,6 +13,9 @@
     <div class="brc-edit-flex-container">
       <div class="brc-label-group">
         <p class="description">Brochure File</p>
+      </div>
+      <div class="brc-field-group brc-current-file">
+        <a id="<?php echo $current_file_id; ?>" target="_blank" href="<?php echo $meta_data['url'] ?>"><?php echo basename($meta_data['url']) ?></a>
         <div class="brc-button-group">
           <button type="button" id="<?php echo $launch_button_id; ?>" class="brc-button">
             <span class="brc-button-text">Choose</span>
@@ -22,8 +25,14 @@
           </button>
         </div>
       </div>
-      <div class="brc-field-group brc-current-file">
-        <a id="<?php echo $current_file_id; ?>" target="_blank" href="<?php echo $meta_data['url'] ?>"><?php echo $meta_data['url'] ?></a>
+    </div>
+
+    <div class="brc-edit-flex-container">
+      <div class="brc-label-group">
+        <p class="description">Issuu URL</p>
+      </div>
+      <div class="brc-field-group">
+        <input type="text" class="brc-text-input" id="<?php echo $current_issuu_id; ?>" placeholder="Enter a URL..." value="<?php echo $meta_data['issuu'] ?>" />
       </div>
     </div>
 

@@ -47,6 +47,10 @@
     return mediaInstance;
   }
 
+  function basename(path) {
+    return path.split(/[\\/]/).pop();
+  }
+
   function saveBrochureToPost(brochureUrl) {
     var spinnerContainer = $("#brc-spinner-container");
 
@@ -62,13 +66,14 @@
         brochure_url: brochureUrl
       },
       success: function(response) {
+        var base = basename(brochureUrl);
+
         removeSpinner(spinnerContainer);
-        $("#" + mediaLocalData.currentFile).attr('href', brochureUrl);
-        $("#" + mediaLocalData.currentFile).html(brochureUrl);
+        $("#" + mediaLocalData.currentFile).attr('href', base);
+        $("#" + mediaLocalData.currentFile).html(base);
         $("#" + mediaLocalData.deleteButton).prop('disabled', false);
 
         showBrochureUpdateNotice(response.notice);
-        console.log(response);
       }
     });
   }

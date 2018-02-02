@@ -19,11 +19,9 @@
   line-height: 18px;
 }
 
-.brc-product-type {
-  padding-bottom: 14px;
-}
-
-.brc-download-button {
+.brc-request-button {
+  background-color: #257aaf;
+  color: #fff;
   margin: 0 auto;
   width: 90px;
   font-size: 10px;
@@ -32,9 +30,21 @@
   padding-bottom: 9px;
 }
 
-.brc-contain-download-button {
+.brc-request-button:hover {
+  background-color: #559b7c;
+  color: #fff;
+  text-decoration: none;
+}
+
+.brc-request-wrapper {
   text-align: center;
-  padding-top: 2px;
+  padding-top: 7px;
+}
+
+.brc-request-all .brc-request-button {
+  cursor: pointer;
+  width: 200px;
+  font-family: 'TeX Gyre Adventor';
 }
 
 .brc-thumbnail {
@@ -167,5 +177,10 @@
 .brc-none-body p {
   font-family: 'TeX Gyre Adventor';
   font-size: 13px;
+}
+
+.brc-links-wrapper {
+  text-align: center;
+  padding-top: 7px;
 }
 
