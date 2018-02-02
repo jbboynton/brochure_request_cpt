@@ -36,11 +36,4 @@ $book_icon_url = Helpers::build_book_icon_url();
     <?php endif; ?>
       <a class="brc-pagination-link" href="<?php echo $url ?>" target="_blank" rel="noreferrer noopener">DOWNLOAD</a>
   </div>
-
-<?php if (is_user_logged_in()): ?>
-  <div class="brc-request-wrapper">
-    <a class="menu-button brc-request-button">Request</a>
-  </div>
-<?php endif; ?>
-
 </div>

@@ -5,15 +5,15 @@
 <div class="container">
   <div class="content-wrapper">
     <div class="row">
+      <h1 class="brc-page-title">Brochures &amp; Catalogs</h1>
+    </div>
+    <div class="row">
       <div class="col-md-3">
         <div class="sidebar-widget-area">
           <?php dynamic_sidebar('sidebar-with-filter'); ?>
         </div>
       </div>
       <div class="col-md-9">
-      <div class="brc-request-all">
-          <a class="menu-button brc-request-button">Request Print Catalogs <i class="fa fa-book"></i></a>
-        </div>
         <div class="brc-main-content">
           <div id="posts-container" class="archive">
             <?php if ($wp_query->have_posts()):
