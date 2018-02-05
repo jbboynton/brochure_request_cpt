@@ -123,7 +123,6 @@
     }
 
     function updateCounter() {
-      console.log('updating counter');
       var counter = $("#brc-counter");
       var cart = getCart();
       var total = cart.length;
@@ -138,7 +137,6 @@
     }
 
     function updateTotal() {
-      console.log('updating total');
       var quantity = $("#brc-li-total-qty");
       var quantityInputs = $(".brc-li-text");
       var total = 0;
@@ -207,8 +205,8 @@
       $("#brc-ship-first-name").val(userData.firstName);
       $("#brc-ship-last-name").val(userData.lastName);
       $("#brc-ship-company").val(userData.company);
-      $("#brc-ship-address-line-1").val(userData.addressLine1);
-      $("#brc-ship-address-line-2").val(userData.addressLine2);
+      $("#brc-ship-address-1").val(userData.addressLine1);
+      $("#brc-ship-address-2").val(userData.addressLine2);
       $("#brc-ship-city").val(userData.city);
       $("#brc-ship-state").val(userData.state);
       $("#brc-ship-zip-code").val(userData.zipCode);
