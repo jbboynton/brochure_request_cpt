@@ -111,7 +111,7 @@ class RequestAjax {
   }
 
   private function mail_request() {
-    $recepients = "james@xzito.com";
+    $recipients = "support@clearymillwork.com";
     $subject = "New Brochure Request from ClearyMillwork.com";
     $message = "";
     $headers = "Content-type: text/plain";
@@ -141,7 +141,7 @@ class RequestAjax {
     $message .= "State:          {$user[6]}".PHP_EOL;
     $message .= "Zip Code:       {$user[7]}".PHP_EOL;
 
-    if (wp_mail($recepients, $subject, $message, $headers)) {
+    if (wp_mail($recipients, $subject, $message, $headers)) {
       $result = "Thank you for your inquiry!";
     } else {
       $result = "There was a problem with your request. Pleae contact ";
