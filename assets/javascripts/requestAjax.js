@@ -109,6 +109,13 @@
       Cookies.set("brc_cart",  cartString);
     }
 
+    function resetCart() {
+      console.log('resetting');
+      var empty = [];
+
+      saveCart(empty);
+    }
+
     function loadCart() {
       $(".brc-request-single").each(function() {
         var brochureId = $(this).data("brochure-id");
@@ -220,6 +227,9 @@
       $(".brc-request-single").each(function() {
         $(this).request("remove");
       });
+
+      resetCart();
+      updateCounter();
     });
 
     $("body").on("touchstart click", "#brc-request-all", function() {
@@ -298,6 +308,9 @@
           $(".brc-request-single").each(function() {
             $(this).request("remove");
           });
+
+          resetCart();
+          updateCounter();
 
           $("#brc-checkout-modal").on('hidden.bs.modal', function() {
             $(this).replaceWith(response.modalHtml);
