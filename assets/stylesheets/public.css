@@ -26,6 +26,7 @@
   width: 90px;
   font-size: 10px;
   line-height: 13px;
+  border-radius: 4px !important;
   padding-top: 9px;
   padding-bottom: 9px;
   cursor: pointer;
@@ -41,6 +42,7 @@
 .brc-request-button.brc-cancel {
   background-color: #fff;
   color: #7D807B;
+  margin-right: 7px !important;
 }
 
 .brc-request-button.brc-cancel:hover {

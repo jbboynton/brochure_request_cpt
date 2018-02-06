@@ -14,6 +14,7 @@ class RequestAjax {
   private $html = '';
   private $user = '';
   private $request = '';
+  private $modal_html = '';
 
   public function __construct() {
     add_action('wp_ajax_build_modal', array($this, 'build_modal'));
@@ -41,9 +42,11 @@ class RequestAjax {
     $this->request = $_POST['request_data'] ?? array();
 
     $result = $this->mail_request();
+    $this->build_modal_html();
 
     $response = array(
-      'data' => $result
+      'data' => $result,
+      'modalHtml' => $this->modal_html
     );
 
     wp_send_json($response);
@@ -148,5 +151,16 @@ class RequestAjax {
 
     return $result;
   }
+
+  private function build_modal_html() {
+    ob_start();
+
+    include plugin_dir_path(dirname(__FILE__)) .
+      'templates/partials/modal.php';
+    $this->modal_markup = ob_get_contents();
+
+    ob_end_clean();
+  }
+
 }
 

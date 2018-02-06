@@ -212,9 +212,14 @@
       $("#brc-ship-zip-code").val(userData.zipCode);
     }
 
-
     $("body").on("touchstart click", ".brc-request-single", function() {
       $(this).toggleRequest();
+    });
+
+    $("body").on("touchstart click", "#brc-clear-all", function() {
+      $(".brc-request-single").each(function() {
+        $(this).request("remove");
+      });
     });
 
     $("body").on("touchstart click", "#brc-request-all", function() {
@@ -289,6 +294,14 @@
           removeSpinner(spinnerContainer);
           modalBody.html(response.data).fadeIn(500);
           $("#brc-request-submit").remove();
+
+          $(".brc-request-single").each(function() {
+            $(this).request("remove");
+          });
+
+          $("#brc-checkout-modal").on('hidden.bs.modal', function() {
+            $(this).replaceWith(response.modalHtml);
+          });
         }
       });
     });
