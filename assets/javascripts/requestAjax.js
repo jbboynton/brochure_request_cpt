@@ -359,9 +359,11 @@
           "please fill in required fields</span>";
         var span = $(spanText);
 
+        $("#brc-validation-message").remove();
+        shippingInfoPane.append(span);
+
         if (shippingInfoPane.hasClass('collapsed')) {
           shippingInfoPane.trigger('click');
-          shippingInfoPane.append(span);
         }
       }
     });

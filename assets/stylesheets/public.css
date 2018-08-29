@@ -19,8 +19,7 @@
   line-height: 18px;
 }
 
-.brc-request-button,
-button.brc-request-button {
+.brc-request-button {
   background-color: #257aaf;
   color: #fff;
   margin: 0 auto;
