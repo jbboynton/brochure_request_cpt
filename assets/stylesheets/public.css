@@ -19,7 +19,8 @@
   line-height: 18px;
 }
 
-.brc-request-button {
+.brc-request-button,
+button.brc-request-button {
   background-color: #257aaf;
   color: #fff;
   margin: 0 auto;
@@ -37,7 +38,6 @@
   color: #fff;
   text-decoration: none;
 }
-
 
 .brc-request-button.brc-cancel {
   background-color: #fff;
@@ -152,6 +152,7 @@ form.brc-li-form {
 
 .brc-li-item-name {
   flex: 3 3 auto;
+  padding-right: 15px;
 }
 
 form.brc-li-form {
@@ -288,6 +289,24 @@ form.brc-li-form label {
   border: none;
   border-radius: 0;
   box-shadow: none;
+}
+
+.brc-panel-title-button {
+  display: block;
+}
+
+.brc-panel-title-button:after {
+  content: "⌃";
+  float: right;
+  color: rgb(85, 85, 85);
+}
+
+.brc-panel-title-button.collapsed:after {
+  transform: rotate(180deg);
+}
+
+#brc-validation-message {
+  color: #AA0000;
 }
 
 .brc-panel-heading {

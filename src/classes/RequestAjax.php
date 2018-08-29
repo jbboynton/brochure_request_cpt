@@ -53,10 +53,9 @@ class RequestAjax {
   }
 
   private function build_markup() {
-    $end = "</li>";
+    $count = 1;
 
     foreach ($this->brochures as $brochure) {
-      $count = 1;
 
       // Starting <li>
       $li_start = "<li class=\"list-group-item brc-flex-li brc-line-item\">";
@@ -90,8 +89,6 @@ class RequestAjax {
     $total .= "</div>{$li_end}";
 
     $this->html .= $total;
-
-    return $output;
   }
 
   private function build_user_data() {
@@ -157,7 +154,7 @@ class RequestAjax {
 
     include plugin_dir_path(dirname(__FILE__)) .
       'templates/partials/modal.php';
-    $this->modal_markup = ob_get_contents();
+    $this->modal_html = ob_get_contents();
 
     ob_end_clean();
   }

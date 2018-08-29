@@ -21,7 +21,7 @@
             <span class="brc-button-text">Choose</span>
           </button>
           <button type="button" id="<?php echo $delete_button_id; ?>" class="brc-button brc-delete-button" <?php echo $delete_button_enabled; ?>>
-            <i class="fa fa-times"></i>
+            ×
           </button>
         </div>
       </div>

@@ -185,27 +185,61 @@
     }
 
     function buildUserData() {
-      var firstName = $("#brc-ship-first-name").val();
-      var lastName = $("#brc-ship-last-name").val();
-      var company = $("#brc-ship-company").val();
-      var addressLine1 = $("#brc-ship-address-line-1").val();
-      var addressLine2 = $("#brc-ship-address-line-2").val();
-      var city = $("#brc-ship-city").val();
-      var state = $("#brc-ship-state").val();
-      var zipCode = $("#brc-ship-zip-code").val();
+      var firstName = $("#brc-ship-first-name");
+      var lastName = $("#brc-ship-last-name");
+      var company = $("#brc-ship-company");
+      var addressLine1 = $("#brc-ship-address-line-1");
+      var addressLine2 = $("#brc-ship-address-line-2");
+      var city = $("#brc-ship-city");
+      var state = $("#brc-ship-state");
+      var zipCode = $("#brc-ship-zip-code");
 
-      var user = [
-        firstName,
-        lastName,
-        company,
-        addressLine1,
-        addressLine2,
-        city,
-        state,
-        zipCode
-      ];
+      var requiredFields = [firstName, lastName, addressLine1, city, state, zipCode];
+      var emptyFields = validate(requiredFields);
+
+      if (emptyFields === undefined || emptyFields.length == 0) {
+        var user = [
+          firstName.val(),
+          lastName.val(),
+          company.val(),
+          addressLine1.val(),
+          addressLine2.val(),
+          city.val(),
+          state.val(),
+          zipCode.val()
+        ];
+      } else {
+        applyValidationErrors(emptyFields);
+        var user = false;
+      }
 
       return user;
+    }
+
+    function validate(formData) {
+      var invalidFields = [];
+
+      formData.forEach(function(object) {
+        if (!object.val()) {
+          invalidFields.push(object);
+        }
+      });
+
+      return invalidFields;
+    }
+
+    function applyValidationErrors(fields) {
+      fields.forEach(function(field) {
+        field.css("borderColor", "#AA0000");
+
+        field.on("blur", function() {
+          if (field.val()) {
+            field.css("borderColor", "");
+          }
+
+          $("#brc-validation-message").remove();
+        });
+      });
     }
 
     function populateForm(userData) {
@@ -288,35 +322,48 @@
       var modalBody = $("#brc-confirmation");
       var requestData = buildRequestData();
 
-      $.ajax({
-        url: localized.ajaxUrl,
-        type: 'POST',
-        beforeSend: function(xhr) {
-          addSpinner(spinnerContainer);
-          modalBody.fadeOut(500);
-        },
-        data: {
-          action: 'request_brochures',
-          post_id: localized.currentPostId,
-          request_data: requestData
-        },
-        success: function(response) {
-          removeSpinner(spinnerContainer);
-          modalBody.html(response.data).fadeIn(500);
-          $("#brc-request-submit").remove();
+      if (requestData.user) {
+        $.ajax({
+          url: localized.ajaxUrl,
+          type: 'POST',
+          beforeSend: function(xhr) {
+            addSpinner(spinnerContainer);
+            modalBody.fadeOut(500);
+          },
+          data: {
+            action: 'request_brochures',
+            post_id: localized.currentPostId,
+            request_data: requestData.user
+          },
+          success: function(response) {
+            console.log('test');
+            removeSpinner(spinnerContainer);
+            modalBody.html(response.data).fadeIn(500);
+            $("#brc-request-submit").remove();
 
-          $(".brc-request-single").each(function() {
-            $(this).request("remove");
-          });
+            $(".brc-request-single").each(function() {
+              $(this).request("remove");
+            });
 
-          resetCart();
-          updateCounter();
+            resetCart();
+            updateCounter();
 
-          $("#brc-checkout-modal").on('hidden.bs.modal', function() {
-            $(this).replaceWith(response.modalHtml);
-          });
+            $("#brc-checkout-modal").on('hidden.bs.modal', function() {
+              $(this).replaceWith(response.modalHtml);
+            });
+          }
+        });
+      } else {
+        var shippingInfoPane = $("#brc-shipping-info-link");
+        var spanText = "<span id='brc-validation-message' class='small'> – " +
+          "please fill in required fields</span>";
+        var span = $(spanText);
+
+        if (shippingInfoPane.hasClass('collapsed')) {
+          shippingInfoPane.trigger('click');
+          shippingInfoPane.append(span);
         }
-      });
+      }
     });
 
     function addSpinner(container) {
@@ -357,22 +404,22 @@
     function animateSpinner(container, animation, success) {
       if (container.data('animating')) {
         container
-          .removeClass(container.data('animating'))
-          .data('animating', null);
+        .removeClass(container.data('animating'))
+        .data('animating', null);
         container
-          .data('animationTimeout') &&
-            clearTimeout(container.data('animationTimeout'));
+        .data('animationTimeout') &&
+          clearTimeout(container.data('animationTimeout'));
       }
 
       container
-        .addClass('brc-spinner-' + animation)
-        .data('animating', 'brc-spinner-' + animation);
+      .addClass('brc-spinner-' + animation)
+      .data('animating', 'brc-spinner-' + animation);
       container
-        .data('animationTimeout', setTimeout(function() {
-          animation == 'remove' && container.remove();
-          success && success();
-        },
-        parseFloat(container.css('animation-duration')) * 1000));
+      .data('animationTimeout', setTimeout(function() {
+        animation == 'remove' && container.remove();
+        success && success();
+      },
+      parseFloat(container.css('animation-duration')) * 1000));
     }
 
     loadCart();

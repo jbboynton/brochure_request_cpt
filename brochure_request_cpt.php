@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Brochure Request CPT
  * Description: Manage brochures and publication requests with WordPress.
- * Version: 0.1.0
+ * Version: 1.6.0
  * Author: James Boynton
  */
 
