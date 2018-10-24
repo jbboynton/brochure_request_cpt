@@ -1,6 +1,6 @@
 {
   "name": "jbboynton/brochure_request_cpt",
-  "version" : "1.6.2",
+  "version" : "1.7.0",
   "description": "A custom post type for representing brochures and catalogs.",
   "type": "wordpress-plugin",
   "authors": [
