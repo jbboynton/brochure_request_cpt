@@ -26,6 +26,10 @@ class Constants {
   public static $PUBLIC_CSS_PATH =
     'brochure_request_cpt/assets/stylesheets/public.css';
 
+  public static $LOGGED_OUT_CSS_ID = 'brc_logged_out_css';
+  public static $LOGGED_OUT_CSS_PATH =
+    'brochure_request_cpt/assets/stylesheets/logged_out.css';
+
   public static $SPINNER_CSS_ID = 'brc_spinner_css';
   public static $SPINNER_CSS_PATH =
     'brochure_request_cpt/assets/stylesheets/spinner.css';

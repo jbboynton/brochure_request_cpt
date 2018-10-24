@@ -97,7 +97,7 @@ class AdminUI {
    * file), and then add them below.
    */
   private function find_stylesheets() {
-    return array(
+    $stylesheets = array(
       array(
         Constants::$ADMIN_CSS_ID,
         plugins_url(Constants::$ADMIN_CSS_PATH)
@@ -111,6 +111,15 @@ class AdminUI {
         plugins_url(Constants::$SPINNER_CSS_PATH)
       )
     );
+
+    if (!is_user_logged_in()) {
+      $stylesheets[] = array(
+        Constants::$LOGGED_OUT_CSS_ID,
+        plugins_url(Constants::$LOGGED_OUT_CSS_PATH)
+      );
+    }
+
+    return $stylesheets;
   }
 
   private function enqueue_media() {
