@@ -110,7 +110,6 @@
     }
 
     function resetCart() {
-      console.log('resetting');
       var empty = [];
 
       saveCart(empty);
@@ -333,10 +332,9 @@
           data: {
             action: 'request_brochures',
             post_id: localized.currentPostId,
-            request_data: requestData.user
+            request_data: requestData
           },
           success: function(response) {
-            console.log('test');
             removeSpinner(spinnerContainer);
             modalBody.html(response.data).fadeIn(500);
             $("#brc-request-submit").remove();
